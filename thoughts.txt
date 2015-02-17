@@ -8,6 +8,8 @@ COOPER HEWITT API
 	- tags
 	- place of origin
 
+- look at the triennial exhibitions, what are the themes around each
+
 http://goo.gl/wd74rS
 http://wp.me/p4ofKa-xk
 http://goo.gl/6EQ7wX
@@ -17,6 +19,34 @@ http://git.io/BOJ7lg
 http://goo.gl/HHkAmC
 
 
+
+
 “It relies on the assumption that physical possession of an object as a requirement for an acquisition is no longer necessary, and therefore it sets curators free to tag the world and acknowledge things that “cannot be had”—because they are too big (buildings, Boeing 747’s, satellites), or because they are in the air and belong to everybody and to no one, like the @—as art objects befitting MoMA’s collection. The same criteria of quality, relevance, and overall excellence shared by all objects in MoMA’s collection also apply to these entities.”
 
 Paola Antonelli on MoMA’s acquisition of the @ symbol
+
+
+
+MUSEUMS AND THE MEANINGS OF THEIR CONTENTS, PETER JONES, 1992
+
+“What count as cultural activities, achievements, and institutions are determined by the social, political, intellectual, institutional histories familiar to the judges who make the claims.” pg 915
+
+“Museums…must struggle to prevent such collections from seeming to be, in their hands, accidental aggregates of objects.” pg 916
+
+“For museum, of course, are part of history; they interpret it and make it, and accordingly must be sensitive to the central issues in the philosophy of history. Not only must they be willing to explain they they single out just these events for attention rather than others - or, indeed, why they parcel up the continuum of experience into the chosen slices called “events” - but they must acknowledge Hume’s point  that every history faces an irresolvable dilemma…” pg 918
+
+
+
+EMERGING ISSUES IN CONTEMPORARY DESIGN: A ROUNDTABLE
+
+“Bloemink: This idea of innovation persuaded all of us that this work was significant and needed to be included.” pg 95
+
+“Bloemink: The previous two triennials revolved around themes of, first, technology, and then domestication and nesting after 9/11. Instead of one general idea, the third triennial reflects that the past few years have been a time of extreme polarities between radical new technologies, including robotics and other innovations, and do-it-yourself crafts. Much of the work raised questions regarding virtuality and authenticity, biomimicry and technology, and local and global issues.” pg 96-97
+
+“Bloemink: Craft and design, as well as the whole do-it-yourself area, are not that dissimilar. They both seek to make personal, significant, and transformative objects.” pg 97
+
+“Bloemink: In our selection, we didn’t ask: is this work going to last, be timeless and have enduring historical significance? Many of these works may not be lasting, but in this moment they seem indicative, important, and innovative.” pg 99
+
+“Phillips: The centre of gravity has shifted from concepts and theories to pragmatics and applications. But perhaps we are approaching a tipping point when we can begin to examine ideas raised by an increasingly technologized design world.” pg 102
+
+“McQuaid: “…how to understand it to a certain degree, and then how to communicate its significant to an audience that may not have an idea of what it is. It is about taking complex, specific work and making it comprehensible in the public realm.” pg 106 
