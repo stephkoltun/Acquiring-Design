@@ -2,9 +2,53 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Aquiring Design</title>
+		<title>Aquiring History</title>
 
-		<meta name="description" content ="An analysis of when design becomes significant to history"
+		<meta name="description" content ="An analysis of when design becomes significant to history">
 
 		<link rel="stylesheet" href="styles.css">
 	</head>
+
+	<body>
+		<h1>Acquiring-History</h1>
+	</body>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+
+	<script type="text/javascript">
+
+		var token = "2907bb23a319de02d7174829a85eef94";
+
+		var objectID = "18200221";
+
+		var url ='https://api.collection.cooperhewitt.org/rest/?method=cooperhewitt.objects.getInfo&access_token=' + token + '&object_id=' + objectID;
+
+		console.log(url);
+
+		var request = new XMLHttpRequest();
+		//prepare the request
+		request.open("GET", url, true);
+		//request.responseType =
+
+		request.onload = function (event) {
+			var objResponse = request.response;
+
+			var obj = JSON.parse(objResponse).object;
+			//console.log(objParse);
+			//console.log(objParse.object.title);
+			var objTitle = obj.title;
+			var objAcquire = obj.year_acquired;
+			
+			var $msg = "<p>" + objTitle + " was aquired in " + objAcquire + ".</p>";
+			$('h1').after($msg);
+		}
+
+		request.send();
+
+
+
+
+	</script>
+
+</html>
