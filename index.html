@@ -18,36 +18,36 @@
 
 	<script type="text/javascript">
 
+		//Cooper Hewitt API token - need to keep this a secret eventually!
 		var token = "2907bb23a319de02d7174829a85eef94";
+		var objectID = "18200221";	// random object from collection
 
-		var objectID = "18200221";
-
+		//get info about a specific object method - returns JSON
 		var url ='https://api.collection.cooperhewitt.org/rest/?method=cooperhewitt.objects.getInfo&access_token=' + token + '&object_id=' + objectID;
 
-		console.log(url);
+		
+		var request = new XMLHttpRequest(); //make new AJAX request
+		request.open("GET", url, true);	//prepare the request
 
-		var request = new XMLHttpRequest();
-		//prepare the request
-		request.open("GET", url, true);
-		//request.responseType =
-
+		// after request has returned response...
 		request.onload = function (event) {
-			var objResponse = request.response;
-
-			var obj = JSON.parse(objResponse).object;
-			//console.log(objParse);
-			//console.log(objParse.object.title);
-			var objTitle = obj.title;
-			var objAcquire = obj.year_acquired;
 			
-			var $msg = "<p>" + objTitle + " was aquired in " + objAcquire + ".</p>";
+			var objResponse = request.response; // variable to hold the response
+
+			// use parse to turn JSON into object literal notation - 
+			// but my request is returning the JSON object within another object - 
+			// why????? (hence the .object...)
+			var obj = JSON.parse(objResponse).object;
+
+
+			var objTitle = obj.title;			//variable for the title of the object
+			var objAcquired = obj.year_acquired;	//variable for acquisition date
+			
+			var $msg = "<p>" + objTitle + " was aquired in " + objAcquired + ".</p>";
 			$('h1').after($msg);
 		}
 
-		request.send();
-
-
-
+		request.send();	// send HTTP request
 
 	</script>
 
