@@ -16,6 +16,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
 
+	<!--Gets acquistion year and completetion year for specific object-->
 	<script type="text/javascript">
 
 		//Cooper Hewitt API token - need to keep this a secret eventually!
@@ -39,16 +40,57 @@
 			// why????? (hence the .object...)
 			var obj = JSON.parse(objResponse).object;
 
+			console.log(obj);
 
-			var objTitle = obj.title;			//variable for the title of the object
+
+			var objTitle = obj.title;		//variable for the title of the object
+			var objYearEnd = obj.year_end;	//variable for when object was finished
+			var objYearStart = obj.year_start;	//variable for when object was finished
+			var objDate = obj.date;
 			var objAcquired = obj.year_acquired;	//variable for acquisition date
 			
-			var $msg = "<p>" + objTitle + " was aquired in " + objAcquired + ".</p>";
+			var $msg = "<p>" + objTitle + ", created in " + objDate + ", was aquired by the Cooper Hewitt in " + objAcquired + ".</p>";
 			$('h1').after($msg);
 		}
 
 		request.send();	// send HTTP request
 
 	</script>
+
+
+	<!--Gets objects based on a specified acquistion year
+	<script type="text/javascript">
+	//Cooper Hewitt API token - need to keep this a secret eventually!
+		var token = "2907bb23a319de02d7174829a85eef94";
+		var aquisitionYear = "1955";	// random object from collection
+
+		//get info about a specific object method - returns JSON
+		var url ='https://api.collection.cooperhewitt.org/rest/?method=cooperhewitt.search.objects&access_token=' + token + '&year_acquired=' + aquisitionYear;
+
+
+		var request = new XMLHttpRequest(); //make new AJAX request
+		request.open("GET", url, true);	//prepare the request
+
+		// after request has returned response...
+		request.onload = function (event) {
+			
+			var objResponse = request.response; // variable to hold the response
+
+			// use parse to turn JSON into object literal notation - 
+			// but my request is returning the JSON object within another object - 
+			// why????? (hence the .object...)
+			var objects = JSON.parse(objResponse).objects;
+
+			console.log(objects);
+
+			/*var objTitle = objects.title;			//variable for the title of the object
+			
+			var $msg = "<p>" + objTitle + " was aquired in " + objAcquired + ".</p>";
+			$('h1').after($msg);*/
+		}
+
+		request.send();	// send HTTP request
+
+	</script>-->
 
 </html>
