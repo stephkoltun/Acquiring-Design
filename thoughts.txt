@@ -13,6 +13,8 @@ COOPER HEWITT API
 - MOMA good design shows on 1940s/1950s
 “displayed objects that the museum considered the epitome of good design”
 
+
+COOPER HEWITT
 http://goo.gl/wd74rS
 http://wp.me/p4ofKa-xk
 http://goo.gl/6EQ7wX
@@ -20,6 +22,8 @@ http://git.io/Is53rQ
 http://wp.me/p4ofKa-5a
 http://git.io/BOJ7lg
 http://goo.gl/HHkAmC
+
+http://labs.cooperhewitt.org/2012/exploring-shape-collections-draft/
 
 
 

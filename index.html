@@ -27,7 +27,7 @@
 		var url ='https://api.collection.cooperhewitt.org/rest/?method=cooperhewitt.objects.getInfo&access_token=' + token + '&object_id=' + objectID;
 
 		
-		var request = new XMLHttpRequest(); //make new AJAX request
+		/*var request = new XMLHttpRequest(); //make new AJAX request
 		request.open("GET", url, true);	//prepare the request
 
 		// after request has returned response...
@@ -53,7 +53,37 @@
 			$('h1').after($msg);
 		}
 
-		request.send();	// send HTTP request
+		request.send();	// send HTTP request*/
+
+
+
+		// REWRITE WITH jQUERY
+		var request = $.get(url, function( response ) {
+
+			var objResponse = response; // variable to hold the response
+
+			// use parse to turn JSON into object literal notation - 
+			// but my request is returning the JSON object within another object - 
+			// why????? (hence the .object...)
+			//var obj = JSON.parse(objResponse).object;
+
+			console.log(objResponse.object);
+			var obj = objResponse.object;
+
+
+			var objTitle = obj.title;		//variable for the title of the object
+			var objYearEnd = obj.year_end;	//variable for when object was finished
+			var objYearStart = obj.year_start;	//variable for when object was finished
+			var objDate = obj.date.substring(0,4);
+			var objAcquired = obj.year_acquired;	//variable for acquisition date
+			var yearDelta = objAcquired - objDate;
+			
+			//var $msg = "<p>" + objTitle + ", created in " + objDate + ", was aquired by the Cooper Hewitt in " + objAcquired + ".</p>";
+			var $msg = "<p>" + objTitle + " was acquired " + yearDelta + " years after it was created."
+			$('h1').after($msg);
+
+		});
+
 
 	</script>
 
