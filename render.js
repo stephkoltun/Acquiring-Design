@@ -299,26 +299,26 @@ function makeGraph() {
 		})
 			.each(function(d,i) {
 				d3.select(this).select('.acquired')
-					.transition()
-		    		.delay(100)
-		    		.duration(250)
-					.style('fill','orange');//change circle to filled
+				.transition()
+	    		.delay(100)
+	    		.duration(250)
+				.style('fill','orange');//change circle to filled
 
 				var subSel = d3.select(this).select('g > circle').attr("cy");
 				svg.append("line")
-					.attr("class","acquiredLine")
-		    		.attr("x1", x(format.parse(selectedYearAcquired)))
-		    		.attr("y1", subSel) // y pos of matched marker
-		    		.attr("x2", x(format.parse(selectedYearAcquired)))
-		    		.attr("y2", yPositionAcquired) // y pos of highlighted marker
-		    		.attr("transform", function(d,i) { 
-		    		return "translate(" + margin.left + "," + margin.top + ")";
-		    		})
-		    		.style('opacity','0')
-		    		.transition()
-		    		.delay(100)
-		    		.duration(250)
-		    		.style('opacity','1');
+				.attr("class","acquiredLine")
+	    		.attr("x1", x(format.parse(selectedYearAcquired)))
+	    		.attr("y1", subSel) // y pos of matched marker
+	    		.attr("x2", x(format.parse(selectedYearAcquired)))
+	    		.attr("y2", yPositionAcquired) // y pos of highlighted marker
+	    		.attr("transform", function(d,i) { 
+	    		return "translate(" + margin.left + "," + margin.top + ")";
+	    		})
+	    		.style('opacity','0')
+	    		.transition()
+	    		.delay(100)
+	    		.duration(250)
+	    		.style('opacity','1');
 			})
 			.transition()
 			.style('opacity','1'); //matched objs stay solid
@@ -330,19 +330,19 @@ function makeGraph() {
 			.each(function(d,i) {
 				var subSel = d3.select(this).select('.created').attr("y1");
 				svg.append("line")
-					.attr("class","createdLine")
-		    		.attr("x1", x(format.parse((selectedYearStarted).toString())))
-		    		.attr("y1", subSel)
-		    		.attr("x2", x(format.parse((selectedYearStarted).toString())))
-		    		.attr("y2", yPositionCreated)
-		    		.attr("transform", function(d,i) { 
-		    		return "translate(" + margin.left + "," + margin.top + ")"
-		    		})
-		    		.style('opacity','0')
-		    		.transition()
-		    		.delay(100)
-		    		.duration(250)
-		    		.style('opacity','1');
+				.attr("class","createdLine")
+	    		.attr("x1", x(format.parse((selectedYearStarted).toString())))
+	    		.attr("y1", subSel)
+	    		.attr("x2", x(format.parse((selectedYearStarted).toString())))
+	    		.attr("y2", yPositionCreated)
+	    		.attr("transform", function(d,i) { 
+	    		return "translate(" + margin.left + "," + margin.top + ")"
+	    		})
+	    		.style('opacity','0')
+	    		.transition()
+	    		.delay(100)
+	    		.duration(250)
+	    		.style('opacity','1');
 			})
 			.transition()
 			.style('opacity','1'); //matched objs stay solid
@@ -353,19 +353,19 @@ function makeGraph() {
 			.each(function(d,i) {
 				var subSel = d3.select(this).select('.exhibited').attr("y1");
 				svg.append("line")
-					.attr("class","exhibitLine")
-					.attr("x1", x(format.parse((d.exhibitStart).toString())))
-					.attr("y1", subSel)
-					.attr("x2", x(format.parse((d.exhibitStart).toString())))
-					.attr("y2", yPositionExhibited)
-					.attr("transform", function(d,i) { 
-		    		return "translate(" + margin.left + "," + margin.top + ")";
-		    		})
-		    		.style('opacity','0')
-		    		.transition()
-		    		.delay(100)
-		    		.duration(250)
-		    		.style('opacity','1');
+				.attr("class","exhibitLine")
+				.attr("x1", x(format.parse((d.exhibitStart).toString())))
+				.attr("y1", subSel)
+				.attr("x2", x(format.parse((d.exhibitStart).toString())))
+				.attr("y2", yPositionExhibited)
+				.attr("transform", function(d,i) { 
+	    		return "translate(" + margin.left + "," + margin.top + ")";
+	    		})
+	    		.style('opacity','0')
+	    		.transition()
+	    		.delay(100)
+	    		.duration(250)
+	    		.style('opacity','1');
 			})
 			.transition()
 			.style('opacity','1'); //matched objs stay solid
@@ -378,7 +378,6 @@ function makeGraph() {
 
 
     	//     YEAR LABELS     //
-
 
     	// CREATED
     	// if created spans single year
@@ -466,49 +465,47 @@ function makeGraph() {
 		// if exhibit spans less than 5 years
     	else if ((d.exhibitStart- d.exhibitEnd) <= 5) {
     		currentObject.append("text")
-	    		.attr("class", "tooltip")
-	    		.attr("x", xExhibitedMiddle + 12)
-	    		.attr("y", yPositionExhibited  - 8)
-	    		.text(d.exhibitStart + " - " + d.exhibitEnd)
-	    		.style('opacity','0')
-			    .transition()
-			    .delay(100)
-			    .duration(250)
-			    .style('opacity','1');
+    		.attr("class", "tooltip")
+    		.attr("x", xExhibitedMiddle + 12)
+    		.attr("y", yPositionExhibited  - 8)
+    		.text(d.exhibitStart + " - " + d.exhibitEnd)
+    		.style('opacity','0')
+		    .transition()
+		    .delay(100)
+		    .duration(250)
+		    .style('opacity','1');
     	}
     	// if exhibit spans more than 5 years
     	if ((d.exhibitEnd - d.exhibitStart) > 5) {
     		currentObject.append("text")
-	    		.attr("class", "tooltip")
-	    		.attr("x", xExhibitedStart + 12)
-	    		.attr("y", yPositionExhibited  - 8)
-	    		.text(d.exhibitStart)
-	    		.style('opacity','0')
-			    .transition()
-			    .delay(100)
-			    .duration(250)
-			    .style('opacity','1');
+    		.attr("class", "tooltip")
+    		.attr("x", xExhibitedStart + 12)
+    		.attr("y", yPositionExhibited  - 8)
+    		.text(d.exhibitStart)
+    		.style('opacity','0')
+		    .transition()
+		    .delay(100)
+		    .duration(250)
+		    .style('opacity','1');
 
-	    		currentObject.append("text")
-	    		.attr("class", "tooltip")
-	    		.attr("x", xExhibitedEnd + 12)
-	    		.attr("y", yPositionExhibited  - 8)
-	    		.text(d.exhibitEnd)
-		    	.style('opacity','0')
-			    .transition()
-			    .delay(100)
-			    .duration(250)
-			    .style('opacity','1');
+    		currentObject.append("text")
+    		.attr("class", "tooltip")
+    		.attr("x", xExhibitedEnd + 12)
+    		.attr("y", yPositionExhibited  - 8)
+    		.text(d.exhibitEnd)
+	    	.style('opacity','0')
+		    .transition()
+		    .delay(100)
+		    .duration(250)
+		    .style('opacity','1');
     	}
-
-
-
     }); //end mouse over
 
 
 
 
 
+  	//    MOUSE OUT FUNCTION    //
 
     d3.selectAll("g").on("mouseout", function(d) {
 		d3.selectAll('.object')
@@ -545,21 +542,17 @@ function makeGraph() {
     	.transition()
     	.duration(250)
 		.style('fill','white'); //change circle back to white
-    });
+    }); // end of mouse out
 
 
 
 
 
+    //    OBJECT DETAIL VIEW EVENT LISTENER    //
 
-
-    /* ------ FUNCTIONS FOR OBJECT DETAIL VIEW ------ */
-    // event listener on objects
 	d3.selectAll("g.object").on("click", function(d) {
 		generateObjectView(d);
 	});
-
-	
 
 }; // end of graphing function
 
@@ -646,9 +639,10 @@ function randomObjectObject(objectList, d) {
 	return object;
 }
 
-
-
 function generateObjectView(d) {
+
+	
+
 
 	// check if object detail view already exists...
 	var checkObjectView = $("#objDetailFade");
@@ -685,6 +679,20 @@ function generateObjectView(d) {
 
 
 
+
+
+
+	//    MINI TIMELINE     //
+
+	var format = d3.time.format("%Y"),
+		mindate = format.parse("1880"),
+		maxdate = format.parse("2020");
+
+	// Set up scale functions
+	var x = d3.time.scale()
+			.range([0, 305]) // value -> display
+			.domain([mindate, maxdate]);
+
 	var miniTimeline = d3.select(".blurb")
 		.append("svg")
 		.attr("id","miniTime")
@@ -693,43 +701,51 @@ function generateObjectView(d) {
 
 	miniTimeline.append("line") //overall connection line for each obj
 		.attr("class","lines") // set class for CSS styling
-		.attr("x1", 10)
+		.attr("x1", x(format.parse((d.yearStart).toString())))
 		.attr("y1", 10)
-		.attr("x2", 250)
+		.attr("x2", x(format.parse((d.exhibitEnd).toString())))
 		.attr("y2", 10);
 
 	miniTimeline.append("line") //years created
 		.attr("class","created") 
-		.attr("x1", 10)
+		.attr("x1", x(format.parse((d.yearStart).toString())))
 		.attr("y1", 10)
-		.attr("x2", 10)
+		.attr("x2", x(format.parse((d.yearEnd).toString())))
 		.attr("y2", 10);
 
 	miniTimeline.append("line") //years exhibited
 		.attr("class","exhibited") 
-		.attr("x1", 240)
+		.attr("x1", x(format.parse((d.exhibitStart).toString())))
 		.attr("y1", 10)
-		.attr("x2", 250)
+		.attr("x2", x(format.parse((d.exhibitEnd).toString())))
 		.attr("y2", 10);
 
 	miniTimeline.append("circle") //year acquired
 		.attr("class","acquired")
-		.attr("cx", 200)
+		.attr("cx", x(format.parse((d.yearAcquired))))
 		.attr("cy", 10)
 		.attr("r","2.5px");
 
 
 
 
+
+
+
+
+
+
+
+	//     RANDOM RELATED OBJECTS     //
+
 	// 5 random related objects
 	var randomObjectSet = [];
 	for (i = 0; i < 5; i++) {
 		randomObjectSet.push(randomObjectObject(matchedObjects, d))
 	};
-	console.log("Random Objects: " + randomObjectSet);
 
 
-	// WHY IS THIS NOT APPEARING A SECOND TIME????
+	// WHY DOES THIS NOT APPEARING A SECOND TIME????
 	var imageSVG = d3.select("#objDetailBox")
 			.append("svg")
 			.attr("id","matchObjects")
@@ -773,11 +789,11 @@ function generateObjectView(d) {
 		.attr("fill","none");
 
 
-
 	d3.selectAll(".matchImage").on("click", function(d) {
 		generateObjectView(d);
 	});
 
 }
+
 
 
