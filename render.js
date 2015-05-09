@@ -52,7 +52,7 @@ function makeGraph() {
 
 	// Define axes
 	var xAxis = d3.svg.axis().scale(x).orient("top").ticks(15).tickSize(8);
-	var xSubAxis = d3.svg.axis().scale(x).orient("top").ticks(150).tickSize(3);
+	var xSubAxis = d3.svg.axis().scale(x).orient("top").ticks(150).tickSize(3).tickPadding(8);
 
 
 
@@ -71,16 +71,24 @@ function makeGraph() {
 				.attr("height", 50);
 
 	//Created AXES
-	svgAxes.append("g")
+	var xSubAxisG = svgAxes.append("g")
 		.attr("class","subaxis")
 		.attr("transform", "translate(" + margin.left + ",34)")
 		.call(xSubAxis);
-	svgAxes.append("g")
+	var xAxisG = svgAxes.append("g")
 		.attr("class","axis")
 		.attr("transform", "translate(" + margin.left + ",34)")
 		.call(xAxis);
 
 
+	xSubAxisG.selectAll('text')
+    	.attr("class","axisHide")
+    	.attr("opacity","0")
+    	.style("stroke-width", "1px");
+
+
+    xAxisG.selectAll('text')
+    	.attr("opacity","1");
 
 	// SORT DATA BY YEAR TYPES
 	var sortedByAcquired = allObjectsDataset.sort(function(a, b) {
@@ -211,6 +219,9 @@ function makeGraph() {
 
 
 
+
+
+
     /* ------ MOUSEOVER EVENTS FOR SELECTED OBJECT ------ */
 
     d3.selectAll("g").on("mouseover", function(d) {
@@ -239,7 +250,7 @@ function makeGraph() {
 
 
 
-    	
+
 
 
     	// VARIABLES FOR "THIS" (the object currently hovered over)
@@ -261,6 +272,19 @@ function makeGraph() {
     	var xExhibitedEnd = parseFloat(currentObject.selectAll('.exhibited').attr("x2"));
     	var xExhibitedMiddle = (xExhibitedStart + (xExhibitedEnd-xExhibitedStart));
     	var yPositionExhibited = parseFloat(currentObject.selectAll('.exhibited').attr("y1"));
+
+
+
+    	// set up variables for the moused-over data
+    	var selectedYearAcquired = d.yearAcquired; // year to compare with
+    	var selectedYearStarted = d.yearStart; // year to compare with
+    	var selectedYearExhibited = d.exhibitStart; // year to compare with
+
+
+
+
+
+
 
 
 
@@ -286,13 +310,97 @@ function makeGraph() {
 
 
 
-    	//     HIGHLIGHT RELATED OBJECTS     //
-
-    	// set up variables for the moused-over data
-    	var selectedYearAcquired = d.yearAcquired; // year to compare with
-    	var selectedYearStarted = d.yearStart; // year to compare with
-    	var selectedYearExhibited = d.exhibitStart; // year to compare with
     	
+
+    	
+
+		//     SHOW YEAR LABELS    //
+
+    	var tickformat = d3.time.format("%Y");
+
+    	//hide axes labels
+    	xSubAxisG.selectAll("text")
+		.each(function(d,i) {
+			var parseDate = tickformat(d);
+
+			if ((parseDate == selectedYearAcquired) || (parseDate ==selectedYearStarted) || (parseDate == selectedYearExhibited)) {
+				d3.select(this)
+				.transition()
+				.delay(150)
+				.duration(250)
+				.attr("opacity","1");
+
+	            d3.select(this)
+	            .selectAll('text')
+	            .transition()
+	            .delay(150)
+				.duration(250)
+	            .attr("opacity","1");
+			} 
+		})
+
+		xSubAxisG.selectAll("line")
+		.each(function(d,i) {
+			var parseDate = tickformat(d);
+
+			if (parseDate == selectedYearAcquired) {
+				d3.select(this)
+				.transition()
+				.delay(150)
+				.duration(250)
+				.attr("stroke-width","2px")
+				.attr("y2","-8")
+				.style("stroke", "orange");
+			} 
+
+			else if (parseDate == selectedYearStarted) {
+				d3.select(this)
+				.transition()
+				.delay(150)
+				.duration(250)
+				.attr("stroke-width","2px")
+				.attr("y2","-8")
+				.style("stroke", "teal");
+			} 
+
+			else if (parseDate == selectedYearExhibited) {
+				d3.select(this)
+				.transition()
+				.delay(150)
+				.duration(250)
+				.attr("stroke-width","2px")
+				.attr("y2","-8")
+				.style("stroke", "purple");
+			}
+
+
+		})
+
+
+		xAxisG.selectAll("text")
+		.transition()
+		.delay(150)
+		.duration(250)
+		.attr("opacity","0");
+
+		xAxisG.selectAll("line")
+		.transition()
+		.delay(150)
+		.duration(250)
+		.attr("y2","-3")
+		.style("stroke", "lightgrey");
+
+
+
+
+
+
+
+
+
+		//     HIGHLIGHT RELATED OBJECTS     //
+
+
     	// filter object selection to match mouseover object years
 		d3.selectAll('.object').filter(function(d) {
 			return d.yearAcquired == selectedYearAcquired;
@@ -377,7 +485,7 @@ function makeGraph() {
 
 
 
-    	//     YEAR LABELS     //
+    	/*//     YEAR LABELS     //
 
     	// CREATED
     	// if created spans single year
@@ -498,7 +606,7 @@ function makeGraph() {
 		    .delay(100)
 		    .duration(250)
 		    .style('opacity','1');
-    	}
+    	}*/
     }); //end mouse over
 
 
@@ -542,6 +650,35 @@ function makeGraph() {
     	.transition()
     	.duration(250)
 		.style('fill','white'); //change circle back to white
+
+
+		xSubAxisG.selectAll("text")
+		.transition()
+		.delay(100)
+		.duration(250)
+        .attr("opacity","0");
+
+        xSubAxisG.selectAll("line")
+        .transition()
+        .delay(100)
+        .duration(250)
+        .attr("stroke-width","1px")
+		.attr("y2","-3")
+		.style("stroke", "lightgrey");
+		
+
+		// show labels
+		xAxisG.selectAll("text")
+    	.transition()
+	    .duration(250)
+    	.attr("opacity","1");
+
+    	xAxisG.selectAll("line")
+    	.transition()
+    	.duration(250)
+    	.attr("y2","-8")
+    	.style("stroke", "darkgrey");
+
     }); // end of mouse out
 
 
@@ -673,7 +810,7 @@ function generateObjectView(d) {
 	}
 
 	
-	$("body").append("<div id='objDetailFade'><div id='objDetailBox'><img class='closeImg' src='images/close.png'><img class='detailImage' src=" + d.imageURL + " ></img><h1>" + d.objTitle + "</h1><p class='blurb'>This was created by <a href=''>" + d.designer + createdHTML + "It was acquired by the Cooper Hewitt in <a href=''>" + d.yearAcquired + "</a>. During <a href=''>" + d.exhibitStart + "</a>, it was part of the <a href=''>" + d.exhibitTitle + "</a> exhibition.</p><p class='description'>" + d.objDescription + "</p></div></div>");
+	$("body").append("<div id='objDetailFade'><div id='objDetailBox'><img class='closeImg' src='images/close.png'><img class='detailImage' src=" + d.imageURL + " ></img><div class='timeline'></div><h1>" + d.objTitle + "</h1><p>This was created by <a href=''>" + d.designer + createdHTML + "It was acquired by the Cooper Hewitt in <a href=''>" + d.yearAcquired + "</a>. During <a href=''>" + d.exhibitStart + "</a>, it was part of the <a href=''>" + d.exhibitTitle + "</a> exhibition.</p><p class='description'>" + d.objDescription + "</p></div></div>");
 
 	$("#objDetailFade, #objDetailBox").fadeIn();
 
@@ -684,47 +821,135 @@ function generateObjectView(d) {
 
 	//    MINI TIMELINE     //
 
+	var miniHeight = 26;
+	var miniWidth = 305;
+
 	var format = d3.time.format("%Y"),
 		mindate = format.parse("1880"),
 		maxdate = format.parse("2020");
 
 	// Set up scale functions
 	var x = d3.time.scale()
-			.range([0, 305]) // value -> display
+			.range([0, miniWidth]) // value -> display
 			.domain([mindate, maxdate]);
 
-	var miniTimeline = d3.select(".blurb")
+	var miniTimeline = d3.select(".timeline")
 		.append("svg")
 		.attr("id","miniTime")
-		.attr("width",305)
-		.attr("height",20);
+		.attr("width",miniWidth)
+		.attr("height",miniHeight);
 
-	miniTimeline.append("line") //overall connection line for each obj
-		.attr("class","lines") // set class for CSS styling
+	miniTimeline.append("line") //overall connection line 
+		.attr("class","lines") 
 		.attr("x1", x(format.parse((d.yearStart).toString())))
-		.attr("y1", 10)
+		.attr("y1", miniHeight/2+2)
 		.attr("x2", x(format.parse((d.exhibitEnd).toString())))
-		.attr("y2", 10);
+		.attr("y2", miniHeight/2+2);
 
 	miniTimeline.append("line") //years created
 		.attr("class","created") 
 		.attr("x1", x(format.parse((d.yearStart).toString())))
-		.attr("y1", 10)
+		.attr("y1", miniHeight/2+2)
 		.attr("x2", x(format.parse((d.yearEnd).toString())))
-		.attr("y2", 10);
+		.attr("y2", miniHeight/2+2);
 
 	miniTimeline.append("line") //years exhibited
 		.attr("class","exhibited") 
 		.attr("x1", x(format.parse((d.exhibitStart).toString())))
-		.attr("y1", 10)
+		.attr("y1", miniHeight/2+2)
 		.attr("x2", x(format.parse((d.exhibitEnd).toString())))
-		.attr("y2", 10);
+		.attr("y2", miniHeight/2+2);
 
 	miniTimeline.append("circle") //year acquired
 		.attr("class","acquired")
 		.attr("cx", x(format.parse((d.yearAcquired))))
-		.attr("cy", 10)
+		.attr("cy", miniHeight/2+2)
 		.attr("r","2.5px");
+
+
+
+
+	//     MINITIMELINE LABELS     //
+
+	// CREATED
+	// if created spans single year
+	if (d.yearStart === d.yearEnd) {
+		miniTimeline.append("text")
+		.attr("class", "tooltip")
+		.attr("x", x(format.parse((d.yearStart).toString())))
+		.attr("y", miniHeight/2 - 7)
+		.text(d.yearStart);
+	}
+	// if created spans less than 5 years
+	else if ((d.yearEnd - d.yearStart) <= 5) {
+		miniTimeline.append("text")
+		.attr("class", "tooltip")
+		.attr("x", x(format.parse((d.yearStart).toString())))
+		.attr("y", miniHeight/2 - 7)
+		.text(d.yearStart + " - " + d.yearEnd);
+	}
+	// if created spans more than 5 years
+	if ((d.yearEnd - d.yearStart) > 5) {
+		miniTimeline.append("text")
+		.attr("class", "tooltip")
+		.attr("x", x(format.parse((d.yearStart).toString())))
+		.attr("y", miniHeight/2 - 7)
+		.text(d.yearStart);
+
+		miniTimeline.append("text")
+		.attr("class", "tooltip")
+		.attr("x", x(format.parse((d.yearEnd).toString())))
+		.attr("y", miniHeight/2 - 7)
+		.text(d.yearEnd);
+	}
+
+	// ACQUIRED
+	// only show year if not already shown
+	if (d.yearEnd != d.yearAcquired || d.yearStart != d.yearAcquired) {
+    	miniTimeline.append("text")
+    		.attr("class", "tooltip")
+    		.attr("x", x(format.parse((d.yearAcquired).toString())))
+    		.attr("y", miniHeight/2 - 7)
+    		.text(d.yearAcquired);
+	}
+
+	
+	// EXHIBITED
+	// if exhibit spans single year
+	if (d.exhibitStart === d.exhibitEnd) {
+		miniTimeline.append("text")
+		.attr("class", "tooltip")
+		.attr("x", x(format.parse((d.exhibitStart).toString())))
+		.attr("y", miniHeight/2 - 7)
+		.text(d.exhibitStart);
+	}
+	// if exhibit spans less than 5 years
+	else if ((d.exhibitStart - d.exhibitEnd) <= 5) {
+		miniTimeline.append("text")
+		.attr("class", "tooltip")
+		.attr("x", x(format.parse((d.exhibitStart).toString())))
+		.attr("y", miniHeight/2 - 7)
+		.text(d.exhibitStart + " - " + d.exhibitEnd);
+	}
+	// if exhibit spans more than 5 years
+	if ((d.exhibitEnd - d.exhibitStart) > 5) {
+		miniTimeline.append("text")
+		.attr("class", "tooltip")
+		.attr("x", x(format.parse((d.exhibitStart).toString())))
+		.attr("y", miniHeight/2 - 7)
+		.text(d.exhibitStart);
+
+		miniTimeline.append("text")
+		.attr("class", "tooltip")
+		.attr("x", x(format.parse((d.exhibitEnd).toString())))
+		.attr("y", miniHeight/2 - 7)
+		.text(d.exhibitEnd);
+	}
+
+
+
+
+
 
 
 

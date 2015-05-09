@@ -121,17 +121,16 @@ li {
 /* ----------- AXES ----------- */
 
 .axis text {
+	fill: black;
     font-family: Akkurat,sans-serif;
     font-size: 10px;
     font-weight: 400;
-    y: -15;
-
 }
 
 .axis line {
     fill: none;
     stroke: darkgrey;
-    stroke-width: 2px;
+    stroke-width: 1px;
     shape-rendering: crispEdges;
 }
 
@@ -139,14 +138,18 @@ li {
 	display: none;
 }
 
-.subaxis text {
-	display: none;
+
+
+.axisHide {
+	fill: black;
+	font-family: Akkurat,sans-serif;
+    font-size: 10px;
+    font-weight: 400;
 }
 
 .subaxis line {
     fill: none;
     stroke: lightgrey;
-    stroke-width: 1px;
     shape-rendering: crispEdges;
 }
 
@@ -482,7 +485,6 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
 	width: 350px;
 	z-index: 201;
 
-	max-height: 600px;
 	overflow: scroll;
 	overflow-x:hidden;
 
@@ -549,6 +551,20 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
   		text-decoration: underline;
   	}
 
+
+  	@media screen and (min-height: 600px) {
+  		max-height: 500px;
+  	}
+
+  	@media screen and (min-height: 750px) {
+  		max-height: 650px;
+  	}
+
+  	@media screen and (min-height: 900px) {
+  		max-height: 750px;
+  	}
+
+
 }
 
 .closeImg {
@@ -567,7 +583,13 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
 	margin: 0 auto;
 	display: block;
 
-	padding: 20px;
+	padding: 20px 20px 10px 20px;
+}
+
+.timeline {
+	margin: 0 auto;
+	width: 310px;
+	padding-bottom: 15px;
 }
 
 #matchObjects {
@@ -589,7 +611,7 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
 }
 
 #miniTime {
-	background-color: rgb(240,240,240);
+	//background-color: rgb(240,240,240);
 	margin-top: 10px;
 }
 
