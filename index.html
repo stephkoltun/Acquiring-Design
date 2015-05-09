@@ -1,126 +1,83 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>Aquiring History</title>
-
-		<meta name="description" content ="An analysis of when design becomes significant to history">
-
-		<link rel="stylesheet" href="styles.css">
-	</head>
-
-	<body>
-		<h1>Acquiring-History</h1>
-	</body>
+<head>
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/loaders.min.css">
+	<link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+	<title>Acquiring Design: Visualizing the Cooper Hewitt's Collection</title>
+	<meta name="description" content="Blah blah blah">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="d3/d3.v3.js"></script>
+</head>
+
+<body>
+
+<div id="loader">
+	<div id="loadingWrapper">
+		<h1>ACQUIRING DESIGN</h1>
+		<h2>A Visualization of Cooper Hewitt Design Museum Collection</h2>
+		<p>Drawing from the Cooper Hewitt Smithsonian Design Museum's collection, Acquiring Design visualizes the ongoing development of its collection and relationships between objects. By presenting the collection as a series of object-relationships over time, the project attempts to uncover trends across mediums, geography, designers, and museum departments. </p>
+		<div class="loader-inner ball-clip-rotate"><div></div></div>
+		<button id="loaded">continue<br><i class="fa fa-arrow-circle-o-right"></i></button>
+		<p id="credit">Another side project by <a href="http://kltn.ca">Stephanie Koltun</a>.</p>
+	</div>
+</div>
 
 
-	<!--Gets acquistion year and completetion year for specific object-->
-	<script type="text/javascript">
+<header id="nav-bar">
+	<h1 id="projectTitle">Acquiring Design</h1>
+	<div id="key">
+		<h1>Multi-Object View</h1>
+		<p>Each object is represented individually, with markers indicating when the piece was created, acquired and exhibited.</p>
+		<ul id="legend">
+			<li><i id="teal" class="fa fa-circle"></i>date created</li>
+			<li><i id="orange" class="fa fa-circle-o"></i>date acquired</li>
+			<li><i id="purple" class="fa fa-circle"></i>date exhibited</li>
+		</ul>
+	</div>
 
-		//Cooper Hewitt API token - need to keep this a secret eventually!
-		var token = "2907bb23a319de02d7174829a85eef94";
-		var objectID = "18200221";	// random object from collection
+	<div id="modes">
+		<h2>modes</h2>
+		<i class="fa fa-bars fa-lg"></i>
+		<i class="fa fa-th fa-lg"></i>
+	</div>
 
-		//get info about a specific object method - returns JSON
-		var url ='https://api.collection.cooperhewitt.org/rest/?method=cooperhewitt.objects.getInfo&access_token=' + token + '&object_id=' + objectID;
+	<!-- <div id="sort">
+		<h2>sort</h2>
+		<i class="fa fa-arrow-up"></i>
+		<i class="fa fa-arrow-down"></i>
+	</div> -->
 
-		
-		/*var request = new XMLHttpRequest(); //make new AJAX request
-		request.open("GET", url, true);	//prepare the request
+	<div id="arrange">
+		<h2>sort by</h2>
+		<ul>
+			<li class="resort"><button id="sortCreated">date created</button></li>
+			<li class="resort"><button id="sortAcquired">date acquired</button></li>
+			<li class="resort"><button id="sortExhibited">date exhibited</button></li>
+		</ul>
+	</div>
 
-		// after request has returned response...
-		request.onload = function (event) {
-			
-			var objResponse = request.response; // variable to hold the response
+	<div id="group">
+		<h2>group by</h2>
+		<ul>
+			<li>department</li>
+			<li>people</li>
+			<li>country</li>
+			<li>exhibition</li>
+		</ul>
+	</div>
+</header>
 
-			// use parse to turn JSON into object literal notation - 
-			// but my request is returning the JSON object within another object - 
-			// why????? (hence the .object...)
-			var obj = JSON.parse(objResponse).object;
-
-			console.log(obj);
-
-
-			var objTitle = obj.title;		//variable for the title of the object
-			var objYearEnd = obj.year_end;	//variable for when object was finished
-			var objYearStart = obj.year_start;	//variable for when object was finished
-			var objDate = obj.date;
-			var objAcquired = obj.year_acquired;	//variable for acquisition date
-			
-			var $msg = "<p>" + objTitle + ", created in " + objDate + ", was aquired by the Cooper Hewitt in " + objAcquired + ".</p>";
-			$('h1').after($msg);
-		}
-
-		request.send();	// send HTTP request*/
-
-
-
-		// REWRITE WITH jQUERY
-		var request = $.get(url, function( response ) {
-
-			var objResponse = response; // variable to hold the response
-
-			// use parse to turn JSON into object literal notation - 
-			// but my request is returning the JSON object within another object - 
-			// why????? (hence the .object...)
-			//var obj = JSON.parse(objResponse).object;
-
-			console.log(objResponse.object);
-			var obj = objResponse.object;
+<section id="graphWrapper">
+	<div id="graph"></div>
+	<div id="graphAxes"></div>
+</section>
 
 
-			var objTitle = obj.title;		//variable for the title of the object
-			var objYearEnd = obj.year_end;	//variable for when object was finished
-			var objYearStart = obj.year_start;	//variable for when object was finished
-			var objDate = obj.date.substring(0,4);
-			var objAcquired = obj.year_acquired;	//variable for acquisition date
-			var yearDelta = objAcquired - objDate;
-			
-			//var $msg = "<p>" + objTitle + ", created in " + objDate + ", was aquired by the Cooper Hewitt in " + objAcquired + ".</p>";
-			var $msg = "<p>" + objTitle + " was acquired " + yearDelta + " years after it was created."
-			$('h1').after($msg);
+<script src="script.js"></script>
 
-		});
-
-
-	</script>
-
-
-	<!--Gets objects based on a specified acquistion year
-	<script type="text/javascript">
-	//Cooper Hewitt API token - need to keep this a secret eventually!
-		var token = "2907bb23a319de02d7174829a85eef94";
-		var aquisitionYear = "1955";	// random object from collection
-
-		//get info about a specific object method - returns JSON
-		var url ='https://api.collection.cooperhewitt.org/rest/?method=cooperhewitt.search.objects&access_token=' + token + '&year_acquired=' + aquisitionYear;
-
-
-		var request = new XMLHttpRequest(); //make new AJAX request
-		request.open("GET", url, true);	//prepare the request
-
-		// after request has returned response...
-		request.onload = function (event) {
-			
-			var objResponse = request.response; // variable to hold the response
-
-			// use parse to turn JSON into object literal notation - 
-			// but my request is returning the JSON object within another object - 
-			// why????? (hence the .object...)
-			var objects = JSON.parse(objResponse).objects;
-
-			console.log(objects);
-
-			/*var objTitle = objects.title;			//variable for the title of the object
-			
-			var $msg = "<p>" + objTitle + " was aquired in " + objAcquired + ".</p>";
-			$('h1').after($msg);*/
-		}
-
-		request.send();	// send HTTP request
-
-	</script>-->
+</body>
 
 </html>
+

@@ -1,0 +1,52 @@
+@mixin nav-style {
+	margin: 0 auto;
+	padding: 0px 30px;
+}
+
+@mixin key-text {
+	h1 {
+		color: white;
+		font: {
+			family: "Akkurat-Bold";
+			size: .8em;
+		}
+		text-transform: uppercase;
+		margin: 0;
+	}
+
+	h2 {
+		color: white;
+		font: {
+			family: "Akkurat-Bold";
+			size: .7em;
+			weight: 100;
+		}
+		text-transform: uppercase;
+		margin-top: 20px;
+		margin-bottom: 5px;
+
+	}
+
+	p {
+		color: white;
+		font: {
+			family: "Akkurat-Light";
+			size: .7em;
+		}
+	}
+	
+	a {
+		text-decoration: none;
+
+		&:link, &:visited {
+			color: $color-main;
+		}
+	}
+}
+
+@mixin link-style($color, $decoration) {
+  	color: $color;
+  	text-decoration: $decoration;
+}
+
+

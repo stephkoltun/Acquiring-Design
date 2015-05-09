@@ -1,0 +1,709 @@
+/*
+-----------------------------------------------------
+Main SCSS file for IWD - 03 Assignment
+
+Stephanie Koltun 
+
+-----------------------------------------------------
+*/
+/* Compass */
+/* Import partial files */
+/* ----- MEDIA QUERIES ----- */
+@font-face {
+  font-family: "Akkurat";
+  src: url("../fonts/Akkurat.otf");
+}
+
+@font-face {
+  font-family: "Akkurat-Italic";
+  src: url("../fonts/Akkurat-Italic.otf");
+}
+
+@font-face {
+  font-family: "Akkurat-Light";
+  src: url("../fonts/Akkurat-Light.otf");
+}
+
+@font-face {
+  font-family: "Akkurat-LightItalic";
+  src: url("../fonts/Akkurat-LightItalic.otf");
+}
+
+@font-face {
+  font-family: "Akkurat-Bold";
+  src: url("../fonts/Akkurat-Bold.otf");
+}
+
+@font-face {
+  font-family: "Akkurat-BoldItalic";
+  src: url("../fonts/Akkurat-BoldItalic.otf");
+}
+
+@font-face {
+  font-family: "FontAwesome";
+  src: url("../fonts/font-awesome/fonts/FontAwesome.otf");
+}
+
+/* line 42, scss/defaults/_typography.scss */
+p {
+  color: #333333;
+  font-family: "Akkurat-Light";
+  font-size: .8em;
+}
+/* line 49, scss/defaults/_typography.scss */
+p a {
+  text-decoration: none;
+}
+/* line 52, scss/defaults/_typography.scss */
+p a:link, p a:visited {
+  color: #333333;
+}
+
+/* line 60, scss/defaults/_typography.scss */
+h1 {
+  margin: 30px 0 30px 0;
+  color: white;
+  font-family: "Akkurat-Bold";
+  font-weight: 400;
+  font-size: 1.4em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+/* line 71, scss/defaults/_typography.scss */
+h1 :hover {
+  cursor: pointer;
+}
+/* line 76, scss/defaults/_typography.scss */
+h1 a:link, h1 a:visited {
+  text-decoration: underline;
+  color: #333333;
+}
+/* line 81, scss/defaults/_typography.scss */
+h1 a:hover {
+  text-decoration: none;
+}
+
+/* line 92, scss/defaults/_typography.scss */
+h3 {
+  display: inline;
+  margin: 1em 0 0 0;
+  padding-right: 1em;
+  float: left;
+  color: #333333;
+  font-family: "Akkurat-Light";
+  font-size: .8em;
+  font-weight: 100;
+}
+/* line 106, scss/defaults/_typography.scss */
+h3 a:link, h3 a:visited {
+  family: "Akkurat-LightItalic";
+  text-decoration: none;
+  weight: 400;
+  color: #333333;
+}
+
+/* {
+	border: 1px solid red;
+}*/
+/* line 32, scss/styles.scss */
+html, body {
+  height: 100%;
+}
+
+/* line 36, scss/styles.scss */
+header {
+  width: 130px;
+  float: left;
+  height: 100%;
+}
+
+/* line 42, scss/styles.scss */
+body {
+  margin: 0 auto;
+  background-color: white;
+}
+
+/* line 48, scss/styles.scss */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 54, scss/styles.scss */
+li {
+  padding-right: 1em;
+}
+
+/* ----------- POSITIONING THE SVGs ----------- */
+/* line 65, scss/styles.scss */
+#graphWrapper {
+  height: 100%;
+}
+
+/* line 69, scss/styles.scss */
+#graph {
+  overflow: scroll;
+  direction: rtl;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 190px;
+}
+
+/* line 80, scss/styles.scss */
+#graphAxes {
+  position: absolute;
+  bottom: 0px;
+  left: 190px;
+  background-color: rgba(250, 250, 250, 0.85);
+}
+
+/* ----------- SCROLL BARS ----------- */
+/* line 95, scss/styles.scss */
+::-webkit-scrollbar {
+  width: 5px;
+  direction: rtl;
+}
+
+/* line 100, scss/styles.scss */
+::-webkit-scrollbar-track:vertical, ::-webkit-scrollbar-corner {
+  background-color: #ededed;
+}
+
+/* line 104, scss/styles.scss */
+::-webkit-scrollbar-track:horizontal {
+  background-color: rgba(250, 250, 250, 0.85);
+}
+
+/* line 108, scss/styles.scss */
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* this will style the thumb, ignoring the track */
+/* line 112, scss/styles.scss */
+::-webkit-scrollbar-button {
+  background-color: #7c2929;
+}
+
+/* ----------- AXES ----------- */
+/* line 123, scss/styles.scss */
+.axis text {
+  font-family: Akkurat,sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  y: -15;
+}
+
+/* line 131, scss/styles.scss */
+.axis line {
+  fill: none;
+  stroke: darkgrey;
+  stroke-width: 2px;
+  shape-rendering: crispEdges;
+}
+
+/* line 138, scss/styles.scss */
+.axis path, .subaxis path {
+  display: none;
+}
+
+/* line 142, scss/styles.scss */
+.subaxis text {
+  display: none;
+}
+
+/* line 146, scss/styles.scss */
+.subaxis line {
+  fill: none;
+  stroke: lightgrey;
+  stroke-width: 1px;
+  shape-rendering: crispEdges;
+}
+
+/* ----------- LOADING PAGE ----------- */
+/* line 161, scss/styles.scss */
+#loader {
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  background-color: #ff661b;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 50px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+/* line 176, scss/styles.scss */
+#loader h1 {
+  color: white;
+  font-family: "Akkurat-Bold";
+  font-weight: 400;
+  font-size: 4em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  padding: 30px 0 5px 0;
+}
+/* line 188, scss/styles.scss */
+#loader h2 {
+  color: white;
+  font-family: "Akkurat";
+  font-weight: 400;
+  font-size: 1.5em;
+  line-height: 1.2;
+  margin: 0;
+  padding: 0 0 20px 0;
+}
+/* line 200, scss/styles.scss */
+#loader p {
+  color: #333333;
+  font-family: "Akkurat";
+  font-weight: 400;
+  font-size: 1.4em;
+  line-height: 1.5;
+  padding-bottom: 20px;
+}
+/* line 211, scss/styles.scss */
+#loader p#credit {
+  color: white;
+  font-family: "Akkurat";
+  font-weight: 400;
+  font-size: .8em;
+  position: absolute;
+  bottom: 100px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+/* line 226, scss/styles.scss */
+#loader a:link, #loader a:visited {
+  text-decoration: underline;
+  color: white;
+}
+/* line 231, scss/styles.scss */
+#loader a:hover {
+  text-decoration: none;
+}
+
+/* line 237, scss/styles.scss */
+#loadingWrapper {
+  width: 70%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* line 243, scss/styles.scss */
+.loaderImage {
+  margin: 0 auto;
+  width: 50px;
+  height: 50px;
+}
+
+/* line 249, scss/styles.scss */
+button#loaded {
+  border: none;
+  background-color: #ff661b;
+  color: #e74c00;
+  padding: 0;
+  cursor: default;
+  width: 200px;
+  margin: 0 auto;
+  display: none;
+  opacity: 0.7;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.8s;
+  -moz-transition-duration: 0.8s;
+  -o-transition-duration: 0.8s;
+  transition-duration: 0.8s;
+  font-family: "Akkurat-Bold";
+  font-size: 2em;
+}
+
+/* line 271, scss/styles.scss */
+button#loaded:hover, button#loaded:active, button#loaded:focus {
+  color: #333333;
+  opacity: 0.85;
+  cursor: pointer;
+}
+
+/* ----------- NAVIGATION ----------- */
+/* line 289, scss/styles.scss */
+#projectTItle:hover {
+  cursor: pointer;
+}
+
+/* line 293, scss/styles.scss */
+#nav-bar {
+  margin: 0 auto;
+  padding: 0px 30px;
+  background-color: #ff7735;
+  font-family: "Akkurat";
+  z-index: 1;
+}
+/* line 299, scss/styles.scss */
+#nav-bar a, #nav-bar a:visited {
+  color: #333333;
+  text-decoration: none;
+}
+/* line 303, scss/styles.scss */
+#nav-bar a:hover {
+  color: #333333;
+  text-decoration: underline;
+}
+
+/* line 311, scss/styles.scss */
+#key {
+  margin-bottom: 50px;
+}
+/* line 7, scss/defaults/_mixins.scss */
+#key h1 {
+  color: white;
+  font-family: "Akkurat-Bold";
+  font-size: .8em;
+  text-transform: uppercase;
+  margin: 0;
+}
+/* line 17, scss/defaults/_mixins.scss */
+#key h2 {
+  color: white;
+  font-family: "Akkurat-Bold";
+  font-size: .7em;
+  font-weight: 100;
+  text-transform: uppercase;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+/* line 30, scss/defaults/_mixins.scss */
+#key p {
+  color: white;
+  font-family: "Akkurat-Light";
+  font-size: .7em;
+}
+/* line 38, scss/defaults/_mixins.scss */
+#key a {
+  text-decoration: none;
+}
+/* line 41, scss/defaults/_mixins.scss */
+#key a:link, #key a:visited {
+  color: #333333;
+}
+
+/* line 7, scss/defaults/_mixins.scss */
+#modes h1, #sort h1, #arrange h1, #group h1 {
+  color: white;
+  font-family: "Akkurat-Bold";
+  font-size: .8em;
+  text-transform: uppercase;
+  margin: 0;
+}
+/* line 17, scss/defaults/_mixins.scss */
+#modes h2, #sort h2, #arrange h2, #group h2 {
+  color: white;
+  font-family: "Akkurat-Bold";
+  font-size: .7em;
+  font-weight: 100;
+  text-transform: uppercase;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+/* line 30, scss/defaults/_mixins.scss */
+#modes p, #sort p, #arrange p, #group p {
+  color: white;
+  font-family: "Akkurat-Light";
+  font-size: .7em;
+}
+/* line 38, scss/defaults/_mixins.scss */
+#modes a, #sort a, #arrange a, #group a {
+  text-decoration: none;
+}
+/* line 41, scss/defaults/_mixins.scss */
+#modes a:link, #modes a:visited, #sort a:link, #sort a:visited, #arrange a:link, #arrange a:visited, #group a:link, #group a:visited {
+  color: #333333;
+}
+/* line 318, scss/styles.scss */
+#modes li, #sort li, #arrange li, #group li {
+  color: white;
+  font-family: "Akkurat-Light";
+  font-size: .7em;
+}
+/* line 326, scss/styles.scss */
+#modes i, #sort i, #arrange i, #group i {
+  color: white;
+  padding-right: 6px;
+}
+
+/* line 332, scss/styles.scss */
+#legend {
+  padding: 0;
+  margin: 0;
+}
+/* line 336, scss/styles.scss */
+#legend li {
+  color: white;
+  font-family: "Akkurat-Light";
+  font-size: .7em;
+  padding: 2px 0;
+  margin: 0;
+}
+/* line 346, scss/styles.scss */
+#legend ul {
+  padding: 0;
+  margin: 10px;
+}
+/* line 351, scss/styles.scss */
+#legend i {
+  padding-right: 10px;
+}
+/* line 356, scss/styles.scss */
+#legend #teal {
+  color: teal;
+}
+/* line 360, scss/styles.scss */
+#legend #orange {
+  color: orange;
+}
+/* line 364, scss/styles.scss */
+#legend #purple {
+  color: purple;
+}
+
+/*--------- GRAPH ---------*/
+/* line 377, scss/styles.scss */
+.lines {
+  stroke-width: 1px;
+  stroke-dasharray: 1px , 1.5px;
+  stroke-linecap: butt;
+  stroke-opacity: 0.4;
+  stroke: black;
+}
+
+/* line 385, scss/styles.scss */
+.obj-trigger {
+  stroke-width: 10px;
+  stroke-linecap: round;
+  stroke: #f0f0f0;
+  stroke-opacity: 0.0;
+}
+
+/* line 392, scss/styles.scss */
+.created {
+  stroke: teal;
+  stroke-width: 4px;
+  stroke-opacity: 1;
+  stroke-linecap: square;
+}
+
+/* line 399, scss/styles.scss */
+.exhibited {
+  stroke: purple;
+  stroke-width: 4px;
+  stroke-opacity: 1;
+  stroke-linecap: square;
+}
+
+/* line 406, scss/styles.scss */
+.acquired {
+  stroke: orange;
+  stroke-width: 1px;
+  fill: white;
+}
+
+/* line 412, scss/styles.scss */
+.acquiredLine {
+  stroke: orange;
+}
+
+/* line 416, scss/styles.scss */
+.createdLine {
+  stroke: teal;
+}
+
+/* line 420, scss/styles.scss */
+.exhibitLine {
+  stroke: purple;
+}
+
+/* line 426, scss/styles.scss */
+.tooltip {
+  text-anchor: middle;
+  font-family: sans-serif;
+  font-size: 8px;
+  fill: black;
+}
+
+/* line 7, scss/defaults/_mixins.scss */
+.resort h1 {
+  color: white;
+  font-family: "Akkurat-Bold";
+  font-size: .8em;
+  text-transform: uppercase;
+  margin: 0;
+}
+/* line 17, scss/defaults/_mixins.scss */
+.resort h2 {
+  color: white;
+  font-family: "Akkurat-Bold";
+  font-size: .7em;
+  font-weight: 100;
+  text-transform: uppercase;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+/* line 30, scss/defaults/_mixins.scss */
+.resort p {
+  color: white;
+  font-family: "Akkurat-Light";
+  font-size: .7em;
+}
+/* line 38, scss/defaults/_mixins.scss */
+.resort a {
+  text-decoration: none;
+}
+/* line 41, scss/defaults/_mixins.scss */
+.resort a:link, .resort a:visited {
+  color: #333333;
+}
+/* line 441, scss/styles.scss */
+.resort button {
+  border: none;
+  background-color: #ff7735;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  color: white;
+  font-family: "Akkurat-Light";
+  font-size: 1em;
+}
+/* line 455, scss/styles.scss */
+.resort button:hover, .resort button:active, .resort button:focus {
+  color: #333333;
+  font-family: "Akkurat";
+  font-size: 1em;
+  cursor: pointer;
+}
+
+/*--------- OBJECT DETAIL VIEW ---------*/
+/* line 471, scss/styles.scss */
+#objDetailFade {
+  height: 100%;
+  width: 100%;
+  z-index: 200;
+  background-color: rgba(255, 102, 27, 0.65);
+  display: none;
+  position: absolute;
+  top: 0;
+}
+
+/* line 483, scss/styles.scss */
+#objDetailBox {
+  width: 350px;
+  z-index: 201;
+  max-height: 600px;
+  overflow: scroll;
+  overflow-x: hidden;
+  background-color: white;
+  box-shadow: 0px 0px 15px #e74c00;
+  display: none;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+/* line 506, scss/styles.scss */
+#objDetailBox h1 {
+  padding: 0 0 10px 0;
+  margin: 0 20px;
+  color: #333333;
+  font-family: "Akkurat";
+  font-size: .8em;
+  text-transform: capitalize;
+}
+/* line 519, scss/styles.scss */
+#objDetailBox h2 {
+  padding: 0;
+  margin: 0;
+  color: #333333;
+  font-family: "Akkurat-Light";
+  font-size: .8em;
+}
+/* line 530, scss/styles.scss */
+#objDetailBox p {
+  margin: 0 20px;
+  padding-bottom: 10px;
+  color: #333333;
+  font-family: "Akkurat-Light";
+  font-size: .8em;
+  line-height: 1.6;
+}
+/* line 542, scss/styles.scss */
+#objDetailBox p.description {
+  font-family: "Akkurat-LightItalic";
+  color: #ababab;
+}
+/* line 549, scss/styles.scss */
+#objDetailBox a, #objDetailBox a:hover, #objDetailBox a:visited {
+  color: #ababab;
+  text-decoration: underline;
+}
+
+/* line 556, scss/styles.scss */
+.closeImg {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 10 10 0 0;
+  width: 30px;
+  cursor: pointer;
+  opacity: .3;
+}
+
+/* line 566, scss/styles.scss */
+.detailImage {
+  width: 310px;
+  max-height: 400px;
+  margin: 0 auto;
+  display: block;
+  padding: 20px;
+}
+
+/* line 575, scss/styles.scss */
+#matchObjects {
+  padding: 5px;
+  margin: 10px 15px;
+}
+
+/* line 581, scss/styles.scss */
+.matchAcquired {
+  box-shadow: 0 0 0 2px orange;
+}
+
+/* line 585, scss/styles.scss */
+.matchCreated {
+  box-shadow: 0 0 0 2px teal;
+}
+
+/* line 589, scss/styles.scss */
+.matchExhibit {
+  box-shadow: 0 0 0 2px purple;
+}
+
+/* line 593, scss/styles.scss */
+#miniTime {
+  background-color: #f0f0f0;
+  margin-top: 10px;
+}
+
+/*--------- MAIN BLOG PAGE ---------*/
+/* line 601, scss/styles.scss */
+.clear {
+  clear: both;
+  line-height: 0;
+}

@@ -1,0 +1,26 @@
+$color-main: #333; // dark grey
+$color-light: #ababab; // light grey
+$color-bkgd: #ededed;// body background 
+$color-accent: #f6f6f6; // submenu background
+$color-error: #ff606e; // error color - red
+$color-orange: rgb(255,102,27); // cooper hewitt orange
+
+
+
+
+// display three articles on the home page
+$max-width-large: 1050px;
+// display two articles on the home page
+$max-width-medium: 700px;
+// ideal line length for single article
+$max-width-small: 550px;
+
+
+/* ----- MEDIA QUERIES ----- */
+
+//iPhone horizontal - use max-width
+$width-small:  800px;
+//iPad horizontal - use min-width
+$width-medium: 820px;
+//desktop - use min-width
+$width-large:  1100px;

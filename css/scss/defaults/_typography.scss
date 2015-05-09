@@ -1,0 +1,119 @@
+
+
+@font-face {
+	font-family: "Akkurat"; 
+	src: url('../fonts/Akkurat.otf');
+}
+
+@font-face {
+	font-family: "Akkurat-Italic";
+	src: url('../fonts/Akkurat-Italic.otf');
+}
+
+@font-face {
+	font-family: "Akkurat-Light";
+	src: url('../fonts/Akkurat-Light.otf');
+}
+
+@font-face {
+	font-family: "Akkurat-LightItalic";
+	src: url('../fonts/Akkurat-LightItalic.otf');
+}
+
+
+@font-face {
+	font-family: "Akkurat-Bold";
+	src: url('../fonts/Akkurat-Bold.otf');
+}
+
+@font-face {
+	font-family: "Akkurat-BoldItalic";
+	src: url('../fonts/Akkurat-BoldItalic.otf');
+}
+
+
+@font-face {
+	font-family: "FontAwesome";
+	src: url('../fonts/font-awesome/fonts/FontAwesome.otf');
+}
+
+
+// typical paragraph styles
+p {
+	color: $color-main;
+	font: {
+		family: "Akkurat-Light";
+		size: .8em;
+	}
+	
+	a {
+		text-decoration: none;
+
+		&:link, &:visited {
+			color: $color-main;
+		}
+	}
+}
+
+
+// typical h1 styles
+h1 {
+	margin: 30px 0 30px 0;
+	color: white;
+	font: {
+		family: "Akkurat-Bold";
+		weight: 400;
+		size: 1.4em;
+	}
+	line-height: 1.2;
+	text-transform: uppercase;
+
+	:hover {
+		cursor: pointer;
+	}
+
+	a {
+		&:link, &:visited {
+			text-decoration: underline;
+			color: $color-main;
+		}
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
+
+}
+
+
+
+
+// typical h3 styles
+h3 {
+	display: inline;
+	margin: 1em 0 0 0;
+	padding-right: 1em;
+	float: left;
+	color: $color-main;
+	
+	font: {
+		family: "Akkurat-Light";
+		size: .8em;
+		weight: 100;
+	}
+
+	a {
+		&:link, &:visited {
+			family: "Akkurat-LightItalic";
+			text-decoration: none;
+			weight: 400;
+			color: $color-main;
+		}
+	}
+}
+
+
+
+
+
+

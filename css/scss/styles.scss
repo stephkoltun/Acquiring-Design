@@ -1,0 +1,602 @@
+/*
+-----------------------------------------------------
+Main SCSS file for IWD - 03 Assignment
+
+Stephanie Koltun 
+
+-----------------------------------------------------
+*/
+
+
+/* Compass */
+@import "compass/css3"; 
+@import "compass/css3/font-face";
+@import "compass/css3/filter";
+
+
+
+/* Import partial files */
+
+// Mixins
+@import "defaults/mixins.scss";
+// Variables
+@import "defaults/variables.scss";
+// Typography
+@import "defaults/typography.scss";
+
+
+/* {
+	border: 1px solid red;
+}*/
+
+html, body {
+	height: 100%;
+}
+
+header {
+	width: 130px;
+	float: left;
+	height: 100%;
+}
+
+body {
+	margin: 0 auto;
+	background-color: white;
+}
+
+
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	padding-right: 1em;
+}
+
+
+
+
+
+
+/* ----------- POSITIONING THE SVGs ----------- */
+
+#graphWrapper {
+	height: 100%
+}
+
+#graph {
+	overflow:scroll;
+	direction:rtl;
+
+	height: 100%;
+
+	position: absolute;
+	top: 0;
+	left: 190px;
+}
+
+#graphAxes {
+	position: absolute;
+	bottom: 0px;
+	left: 190px;
+
+	background-color: rgba(250,250,250,0.85);
+}
+
+
+
+
+
+
+/* ----------- SCROLL BARS ----------- */
+
+::-webkit-scrollbar {
+      width: 5px;
+      direction:rtl;
+} 
+
+::-webkit-scrollbar-track:vertical, ::-webkit-scrollbar-corner {
+      background-color: $color-bkgd;
+}
+
+::-webkit-scrollbar-track:horizontal {
+	background-color: rgba(250,250,250,0.85);
+}
+
+::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.2); 
+} /* this will style the thumb, ignoring the track */
+ 
+::-webkit-scrollbar-button {
+      background-color: #7c2929;
+} 
+
+
+
+
+
+
+/* ----------- AXES ----------- */
+
+.axis text {
+    font-family: Akkurat,sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    y: -15;
+
+}
+
+.axis line {
+    fill: none;
+    stroke: darkgrey;
+    stroke-width: 2px;
+    shape-rendering: crispEdges;
+}
+
+.axis path, .subaxis path {
+	display: none;
+}
+
+.subaxis text {
+	display: none;
+}
+
+.subaxis line {
+    fill: none;
+    stroke: lightgrey;
+    stroke-width: 1px;
+    shape-rendering: crispEdges;
+}
+
+
+
+
+
+
+
+/* ----------- LOADING PAGE ----------- */
+
+#loader {
+	height: 100%;
+	width: 100%;
+	z-index: 100;
+	background-color: $color-orange;
+
+	margin: 0 auto;
+	text-align: center;
+
+	padding-top: 50px;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	h1 {
+		color: white;
+		font: {
+			family: "Akkurat-Bold";
+			weight: 400;
+			size: 4em;
+		}
+		line-height: 1.2;
+		text-transform: uppercase;
+		padding: 30px 0 5px 0;
+	}
+
+	h2 {
+		color: white;
+		font: {
+			family: "Akkurat";
+			weight: 400;
+			size: 1.5em;
+		}
+		line-height: 1.2;
+		margin: 0;
+		padding: 0 0 20px 0;
+	}
+
+	p {
+		color: $color-main;
+		font: {
+			family: "Akkurat";
+			weight: 400;
+			size: 1.4em;
+		}
+		line-height: 1.5;
+		padding-bottom: 20px;
+	}
+
+	p#credit {
+		color: white;
+		font: {
+			family: "Akkurat";
+			weight: 400;
+			size: .8em;
+		}
+		position: absolute;
+		bottom: 100px;
+		left: 0;
+		right: 0;
+		margin: 0 auto;
+	}
+
+	a {
+		&:link, &:visited {
+			text-decoration: underline;
+			color: white;
+		}
+
+		&:hover {
+			text-decoration: none;
+		}	
+	}
+}
+
+#loadingWrapper {
+	width: 70%;
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+.ball-clip-rotate {
+	background-color: $color-orange;
+}
+
+button#loaded {
+		border: none;
+		background-color: $color-orange;
+		color: darken($color-orange, 10%);
+		padding: 0;
+		cursor: default;
+
+		width: 200px;
+		margin: 0 auto;
+
+		display: none; // so that it will fade in when graph is loaded
+
+		opacity: 0.7;
+		@include transition-property(all);
+		@include transition-duration(0.8s);
+
+		font: {
+			family: "Akkurat-Bold";
+			size: 2em;
+		}
+}
+
+button#loaded:hover, button#loaded:active, button#loaded:focus {
+		color: $color-main;
+		opacity: 0.85;
+  		cursor: pointer;
+ 	}
+
+
+
+
+
+
+
+
+
+
+
+/* ----------- NAVIGATION ----------- */
+
+#projectTItle:hover {
+	cursor: pointer;
+}
+
+#nav-bar {
+	@include nav-style;
+
+	background-color: lighten($color-orange,5%);
+	font-family: "Akkurat";
+
+	a, a:visited {
+		@include link-style($color-main, none);
+	}
+
+	a:hover {
+		@include link-style($color-main, underline);
+	}
+
+	z-index: 1;
+}
+
+
+#key {
+	@include key-text;
+	margin-bottom: 50px;
+}
+
+#modes, #sort, #arrange, #group {
+	@include key-text;
+	li {
+		color: white;
+		font: {
+			family: "Akkurat-Light";
+			size: .7em;
+		}
+	}
+
+	i {
+		color: white;
+		padding-right: 6px;
+	}
+}
+
+#legend {
+	padding: 0;
+	margin: 0;
+
+	li {
+		color: white;
+		font: {
+			family: "Akkurat-Light";
+			size: .7em;
+		}
+		padding: 2px 0;
+		margin: 0;
+	}
+
+	ul {
+		padding: 0;
+		margin: 10px;
+	}
+
+	i {
+		padding-right: 10px;
+	}
+
+
+	#teal {
+		color: teal;
+	}
+
+	#orange {
+		color: orange;
+	}
+
+	#purple {
+		color: purple;
+	}
+}
+
+
+
+
+
+
+
+/*--------- GRAPH ---------*/
+//MARKERS
+.lines {
+	stroke-width: 1px;
+	stroke-dasharray: 1px , 1.5px;
+	stroke-linecap: butt;
+	stroke-opacity: 0.4;
+	stroke: black;
+}
+
+.obj-trigger {
+	stroke-width: 10px;
+	stroke-linecap: round;
+	stroke: rgb(240,240,240);
+	stroke-opacity: 0.0;
+}
+
+.created {
+	stroke: teal;
+	stroke-width: 4px;
+	stroke-opacity: 1;
+	stroke-linecap: square;
+}
+
+.exhibited {
+	stroke: purple;
+	stroke-width: 4px;
+	stroke-opacity: 1;
+	stroke-linecap: square;
+}
+
+.acquired {
+	stroke: orange;
+	stroke-width: 1px;
+	fill: white;
+}
+
+.acquiredLine {
+	stroke: orange;
+}
+
+.createdLine {
+	stroke: teal;
+}
+
+.exhibitLine {
+	stroke: purple;
+}
+
+
+
+.tooltip {
+	text-anchor: middle;
+    font-family: sans-serif;
+    font-size: 8px;
+    fill: black;
+}
+
+
+
+
+
+//SORTING BUTTONS
+.resort {
+	@include key-text;
+
+	button {
+		border: none;
+		background-color: lighten($color-orange,5%);
+		padding: 0;
+		margin: 0;
+		cursor: default;
+
+		color: white;
+		font: {
+			family: "Akkurat-Light";
+			size: 1em;
+		}
+	}
+
+	button:hover, button:active, button:focus {
+		color: $color-main;
+  		font: {
+			family: "Akkurat";
+			size: 1em;
+		}
+  		cursor: pointer;
+	 }	
+}
+
+
+
+
+
+/*--------- OBJECT DETAIL VIEW ---------*/
+
+#objDetailFade {
+	height: 100%;
+	width: 100%;
+	z-index: 200;
+	background-color: rgba(255,102,27, 0.65);
+
+	display: none;
+
+	position: absolute;
+	top: 0;
+}
+
+#objDetailBox {
+	width: 350px;
+	z-index: 201;
+
+	max-height: 600px;
+	overflow: scroll;
+	overflow-x:hidden;
+
+	background-color: white;
+	box-shadow: 0px 0px 15px darken($color-orange, 10%);
+
+	display: none;
+
+	margin: 0 auto;
+	padding: 20px;
+
+
+	position: relative;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+  	-ms-transform: translateY(-50%);
+  	transform: translateY(-50%);
+
+  	h1 {
+  		padding: 0 0 10px 0;
+  		margin: 0 20px;
+
+  		color: $color-main;
+		font: {
+			family: "Akkurat";
+			size: .8em;
+		}
+
+  		text-transform: capitalize;
+  	}
+
+  	h2 {
+  		padding: 0;
+  		margin: 0;
+
+  		color: $color-main;
+		font: {
+			family: "Akkurat-Light";
+			size: .8em;
+		}
+  	}
+
+  	p {
+  		margin: 0 20px;
+  		padding-bottom: 10px;
+
+  		color: $color-main;
+  		font: {
+			family: "Akkurat-Light";
+			size: .8em;
+		}
+		line-height: 1.6;
+  	}
+
+  	p.description {
+  		font: {
+			family: "Akkurat-LightItalic";
+		}
+		color: $color-light;
+  	}
+
+  	a, a:hover, a:visited {
+  		color: $color-light;
+  		text-decoration: underline;
+  	}
+
+}
+
+.closeImg {
+	position: absolute;
+	right: 0;
+	top: 0;
+	margin: 10 10 0 0;
+	width: 30px;
+	cursor: pointer;
+	opacity: .3;
+}
+
+.detailImage {
+	width: 310px;
+	max-height: 400px;
+	margin: 0 auto;
+	display: block;
+
+	padding: 20px;
+}
+
+#matchObjects {
+	padding: 5px;
+	margin: 10px 15px;
+}
+
+
+.matchAcquired {
+    box-shadow: 0 0 0 2px orange;
+}
+
+.matchCreated {
+    box-shadow: 0 0 0 2px teal;
+}
+
+.matchExhibit {
+    box-shadow: 0 0 0 2px purple;
+}
+
+#miniTime {
+	background-color: rgb(240,240,240);
+	margin-top: 10px;
+}
+
+
+/*--------- MAIN BLOG PAGE ---------*/
+
+.clear {
+	clear: both;
+	line-height: 0;
+}
