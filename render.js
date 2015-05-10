@@ -170,51 +170,56 @@ function makeGraph() {
 
 
 
-	/* ------ SORTING FUNCTIONS THAT DO NOT WORK AT ALL ------ */
 
-/*	var resortAcquire = d3.select("#sortAcquired")
-		.on("click", function() {
-			console.log("resorting by year acquired");
-			objects.sort(function(a, b) {
-				return d3.ascending(a.yearAcquired, b.yearAcquired);
-			})
-			.order()
-			.transition()
-			.duration(1000)
-	    	.attr("transform", function() { 
-	    		return "translate(" + margin.left + "," +margin.top + ")";
-	    	});
-    	});
-
-		// sort data, bind new Y values, update graph?
+	/* ------ SORTING FUNCTIONS THAT SORT OF WORK ------ */
 
 
-   	var resortCreated = d3.select("#sortCreated")
-		.on("click", function() {
-			console.log("resorting by year created");
-			objects.sort(function(a, b) {
-				return d3.ascending(a.yearStart, b.yearStart);
-			})
-			.transition()
-			.duration(1000)
-	    	.attr("transform", function(d,i) { 
-	    		return "translate(" + margin.left + "," + margin.top + ")";
-	    	});
-    	});
+	d3.select("#sortCreated").on("click", function() {
+		console.log("resorting by year created");
 
-	var resortExhibited = d3.select("#sortExhibited")
-		.on("click", function() {
-			console.log("resorting by year exhibited");
-			objects.sort(function(a, b) {
-				return d3.ascending(a.exhibitStart, b.exhibitStart);
-			})
-			.transition()
-			.duration(1000)
-	    	.attr("transform", function(d,i) { 
-	    		return "translate(" + margin.left + "," + margin.top + ")";
-	    	});
-    	});
-*/
+		d3.selectAll(".object")
+		.sort(function(a, b) {
+			return d3.ascending(a.yearStart, b.yearStart);
+		})
+		.transition()
+		.duration(1000)
+		.attr("transform", function(d, i) {
+			return "translate(" + margin.left + "," + y(i) + margin.top + ")";
+		});
+	})
+
+
+	d3.select("#sortAcquired").on("click", function() {
+		console.log("resorting by year acquired");
+
+		d3.selectAll(".object")
+		.sort(function(a, b) {
+			return d3.ascending(a.yearAcquired, b.yearAcquired);
+		})
+		.transition()
+		.duration(1000)
+		.attr("transform", function(d, i) {
+			return "translate(" + margin.left + "," + y(i) + margin.top + ")";
+		});
+	})
+
+
+	d3.select("#sortExhibited").on("click", function() {
+		console.log("resorting by year exhibited");
+
+		d3.selectAll(".object")
+		.sort(function(a, b) {
+			return d3.ascending(a.exhibitStart, b.exhibitStart);
+		})
+		.transition()
+		.duration(1000)
+		.attr("transform", function(d, i) {
+			return "translate(" + margin.left + "," + y(i) + margin.top + ")";
+		});
+	})
+
+
+
 
 
 
@@ -478,136 +483,10 @@ function makeGraph() {
 			.transition()
 			.style('opacity','1'); //matched objs stay solid
 
-
-	
-
-
-
-
-
-    	/*//     YEAR LABELS     //
-
-    	// CREATED
-    	// if created spans single year
-    	if (xPositionStart === xPositionEnd) {
-    		currentObject.append("text")
-    		.attr("class", "tooltip")
-    		.attr("x", xPositionStart + 12)
-    		.attr("y", yPositionCreated - 8)
-    		.text(d.yearStart)
-    		.style('opacity','0')
-		    .transition()
-		    .delay(100)
-		    .duration(250)
-		    .style('opacity','1');
-    	}
-		// if created spans less than 5 years
-    	else if ((d.yearEnd - d.yearStart) <= 5) {
-    		currentObject.append("text")
-	    		.attr("class", "tooltip")
-	    		.attr("x", xPositionMiddle + 12)
-	    		.attr("y", yPositionCreated  - 8)
-	    		.text(d.yearStart + " - " + d.yearEnd)
-	    		.style('opacity','0')
-			    .transition()
-			    .delay(100)
-			    .duration(250)
-			    .style('opacity','1');
-    	}
-    	// if created spans more than 5 years
-    	if ((d.yearEnd - d.yearStart) > 5) {
-    		currentObject.append("text")
-	    		.attr("class", "tooltip")
-	    		.attr("x", xPositionStart +  12)
-	    		.attr("y", yPositionCreated  - 8)
-	    		.text(d.yearStart)
-	    		.style('opacity','0')
-			    .transition()
-			    .delay(100)
-			    .duration(250)
-			    .style('opacity','1');
-
-	    		currentObject.append("text")
-	    		.attr("class", "tooltip")
-	    		.attr("x", xPositionEnd)
-	    		.attr("y", yPositionCreated  - 8)
-	    		.text(d.yearEnd)
-	    		.style('opacity','0')
-			    .transition()
-			    .delay(100)
-			    .duration(250)
-			    .style('opacity','1');
-    	}
-
-    	
-    	// ACQUIRED
-    	// only show year if not already shown
-    	if (d.yearEnd != d.yearAcquired || d.yearStart != d.yearAcquired) {
-	    	currentObject.append("text")
-	    		.attr("class", "tooltip")
-	    		.attr("x", xPositionAcquired + 12)
-	    		.attr("y", yPositionAcquired  - 8)
-	    		.text(d.yearAcquired)
-	    		.style('opacity','0')
-			    .transition()
-			    .delay(100)
-			    .duration(250)
-			    .style('opacity','1');
-    	}
-
-    	
-    	// EXHIBITED
-    	// if exhibit spans single year
-    	if (xExhibitedStart === xExhibitedEnd) {
-    		currentObject.append("text")
-    		.attr("class", "tooltip")
-    		.attr("x", xExhibitedStart + 12)
-    		.attr("y", yPositionExhibited  - 8)
-    		.text(d.exhibitStart)
-	    	.style('opacity','0')
-		    .transition()
-		    .delay(100)
-		    .duration(250)
-		    .style('opacity','1');
-    	}
-		// if exhibit spans less than 5 years
-    	else if ((d.exhibitStart- d.exhibitEnd) <= 5) {
-    		currentObject.append("text")
-    		.attr("class", "tooltip")
-    		.attr("x", xExhibitedMiddle + 12)
-    		.attr("y", yPositionExhibited  - 8)
-    		.text(d.exhibitStart + " - " + d.exhibitEnd)
-    		.style('opacity','0')
-		    .transition()
-		    .delay(100)
-		    .duration(250)
-		    .style('opacity','1');
-    	}
-    	// if exhibit spans more than 5 years
-    	if ((d.exhibitEnd - d.exhibitStart) > 5) {
-    		currentObject.append("text")
-    		.attr("class", "tooltip")
-    		.attr("x", xExhibitedStart + 12)
-    		.attr("y", yPositionExhibited  - 8)
-    		.text(d.exhibitStart)
-    		.style('opacity','0')
-		    .transition()
-		    .delay(100)
-		    .duration(250)
-		    .style('opacity','1');
-
-    		currentObject.append("text")
-    		.attr("class", "tooltip")
-    		.attr("x", xExhibitedEnd + 12)
-    		.attr("y", yPositionExhibited  - 8)
-    		.text(d.exhibitEnd)
-	    	.style('opacity','0')
-		    .transition()
-		    .delay(100)
-		    .duration(250)
-		    .style('opacity','1');
-    	}*/
     }); //end mouse over
+
+
+
 
 
 
