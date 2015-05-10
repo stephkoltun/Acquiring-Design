@@ -765,11 +765,122 @@ $("body").on('click', '.detailImage, .closeImg', function() {
 
 
 
+
+// OBJECT VIEW //
+function generateObjectView(d) {
+
+
+	// check if object detail view already exists...
+	var checkObjectView = $("#objDetailFade");
+	// remove it if it does
+	if (checkObjectView.is("html *")) {
+		$("#objDetailBox").fadeOut();
+		$("#objDetailFade").fadeOut();
+		setTimeout(function() {
+			$("#objDetailFade").remove();
+		}, 500);
+	}
+
+
+
+
+	// call function to filter matching objects
+	var matchedObjects = filterMatchedObjects(d);
+
+
+
+	if ( d.yearStart == d.yearEnd ) {
+		var createdHTML = "</a> in <a href=''>" + d.yearStart + "</a>.";
+	} 
+	else if ( d.yearStart != d.yearEnd ) {
+		var createdHTML = "</a> between <a href=''>" + d.yearStart + "</a> and <a href=''>" + d.yearEnd + "</a>.";
+	}
+
+	
+	$("body").append("<div id='objDetailFade'><div id='objDetailBox'><img class='closeImg' src='images/close.png'><img class='detailImage' src=" + d.imageURL + " ></img><div class='timeline'></div><h1>" + d.objTitle + "</h1><p>This was created by <a href=''>" + d.designer + createdHTML + "It was acquired by the Cooper Hewitt in <a href=''>" + d.yearAcquired + "</a>. During <a href=''>" + d.exhibitStart + "</a>, it was part of the <a href=''>" + d.exhibitTitle + "</a> exhibition.</p><p class='description'>" + d.objDescription + "</p></div></div>");
+
+	renderRandomObjects(matchedObjects, d);
+
+	renderTimeline(d);
+	
+	$("#objDetailFade, #objDetailBox").fadeIn();
+
+	d3.selectAll(".matchImage").on("click", function(d) {
+		generateObjectView(d);
+	});
+	
+}
+
+
+
+
+
+
+// ----- RANDOM OBJECTS ----- //
+
+function renderRandomObjects(matchedObjects, d) {
+
+	var acquiredMatch = d.yearAcquired;
+	var startMatch = d.yearStart;
+	var endMatch = d.yearEnd;
+	var exhibitMatch = d.exhibitTitle;
+
+	// 5 random related objects
+	var randomObjectSet = [];
+	for (i = 0; i < 5; i++) {
+		randomObjectSet.push(randomObjectObject(matchedObjects, d))
+	};
+
+	// WHY DOES THIS NOT APPEARING A SECOND TIME????
+	var imageSVG = d3.select("#objDetailBox")
+			.append("svg")
+			.attr("id","matchObjects")
+			.attr("width", 310)
+			.attr("height", 60);
+
+	imageSVG.selectAll(".matchImage")
+		.data(randomObjectSet)
+		.enter()
+		.append("svg:image")
+		.attr("class", "matchImage")
+    	.attr("x", function(d,i) {
+			return (i)*62 + 3;
+		})
+		.attr("y", 3)
+		.attr("width","48px")
+		.attr("height","48px")
+		.attr("xlink:href", function(d) {
+			return d.imageSQ;
+		});
+
+	imageSVG.selectAll("rect")
+		.data(randomObjectSet)
+		.enter()
+		.append("rect")
+    	.attr("x", function(d,i) {
+			return (i)*62;
+		})
+		.attr("y", 0)
+		.attr("width","54px")
+		.attr("height","54px")
+		.attr("stroke",function(d){
+			if (d.yearAcquired == acquiredMatch) {
+				return "orange";
+			} else if (d.yearStart == startMatch || d.yearEnd == endMatch) {
+				return "teal";
+			} else if (d.exhibitTitle == exhibitMatch) {
+				return "purple";
+			}
+		})
+		.attr("fill","none");
+}
+
+
+
 // d = object to match properties to
 function filterMatchedObjects(d) {
 
 	var allMatchedObjects = [];
-
 	var matchAcquiredYear = d.yearAcquired;
 	var matchStartYear = d.yearStart;
 	var matchEndYear = d.yearEnd;
@@ -815,66 +926,26 @@ function randomIndexValue(length) {
 function randomObjectObject(objectList, d) {
 	var index = randomIndexValue(objectList.length);
 	var object = objectList[index];
-
 	return object;
 }
 
-function generateObjectView(d) {
-
-	
-
-
-	// check if object detail view already exists...
-	var checkObjectView = $("#objDetailFade");
-	// remove it if it does
-	if (checkObjectView.is("html *")) {
-		$("#objDetailBox").fadeOut();
-		$("#objDetailFade").fadeOut();
-		setTimeout(function() {
-			$("#objDetailFade").remove();
-		}, 500);
-	}
-
-
-	// call function to filter matching objects
-	var matchedObjects = filterMatchedObjects(d);
-
-	var acquiredMatch = d.yearAcquired;
-	var startMatch = d.yearStart;
-	var endMatch = d.yearEnd;
-	var exhibitMatch = d.exhibitTitle;
-
-
-	if ( d.yearStart == d.yearEnd ) {
-		var createdHTML = "</a> in <a href=''>" + d.yearStart + "</a>.";
-	} 
-	else if ( d.yearStart != d.yearEnd ) {
-		var createdHTML = "</a> between <a href=''>" + d.yearStart + "</a> and <a href=''>" + d.yearEnd + "</a>.";
-	}
-
-	
-	$("body").append("<div id='objDetailFade'><div id='objDetailBox'><img class='closeImg' src='images/close.png'><img class='detailImage' src=" + d.imageURL + " ></img><div class='timeline'></div><h1>" + d.objTitle + "</h1><p>This was created by <a href=''>" + d.designer + createdHTML + "It was acquired by the Cooper Hewitt in <a href=''>" + d.yearAcquired + "</a>. During <a href=''>" + d.exhibitStart + "</a>, it was part of the <a href=''>" + d.exhibitTitle + "</a> exhibition.</p><p class='description'>" + d.objDescription + "</p></div></div>");
-
-	$("#objDetailFade, #objDetailBox").fadeIn();
 
 
 
 
-
-
-	//    MINI TIMELINE     //
-
+//    MINI TIMELINE     //
+function renderTimeline(d) {
 	var miniHeight = 26;
 	var miniWidth = 305;
 
 	var format = d3.time.format("%Y"),
 		mindate = format.parse("1880"),
-		maxdate = format.parse("2020");
+		maxdate = format.parse("2025");
 
-	// Set up scale functions
 	var x = d3.time.scale()
 			.range([0, miniWidth]) // value -> display
 			.domain([mindate, maxdate]);
+
 
 	var miniTimeline = d3.select(".timeline")
 		.append("svg")
@@ -914,154 +985,95 @@ function generateObjectView(d) {
 
 	//     MINITIMELINE LABELS     //
 
-	// CREATED
-	// if created spans single year
-	if (d.yearStart === d.yearEnd) {
+	// single label is lifespan is short
+	if ((d.exhibitEnd - d.yearStart) <=15) {
+		var length = (d.exhibitEnd-d.yearStart)/2;
+		var midyear = Math.round(d.yearStart + length);
+
 		miniTimeline.append("text")
 		.attr("class", "tooltip")
-		.attr("x", x(format.parse((d.yearStart).toString())))
+		.attr("x", x(format.parse((midyear).toString())))
 		.attr("y", miniHeight/2 - 7)
-		.text(d.yearStart);
+		.text(d.yearStart + " - " + d.exhibitEnd);
+	} 
+
+	else {
+		// CREATED
+		// if created spans single year
+		if (d.yearStart === d.yearEnd) {
+			miniTimeline.append("text")
+			.attr("class", "tooltip")
+			.attr("x", x(format.parse((d.yearStart).toString())))
+			.attr("y", miniHeight/2 - 7)
+			.text(d.yearStart);
+		}
+		// if created spans less than 5 years
+		else if ((d.yearEnd - d.yearStart) <= 5) {
+			miniTimeline.append("text")
+			.attr("class", "tooltip")
+			.attr("x", x(format.parse((d.yearStart).toString())))
+			.attr("y", miniHeight/2 - 7)
+			.text(d.yearStart + " - " + d.yearEnd);
+		}
+		// if created spans more than 5 years
+		else if ((d.yearEnd - d.yearStart) > 5) {
+			miniTimeline.append("text")
+			.attr("class", "tooltip")
+			.attr("x", x(format.parse((d.yearStart).toString())))
+			.attr("y", miniHeight/2 - 7)
+			.text(d.yearStart);
+
+			miniTimeline.append("text")
+			.attr("class", "tooltip")
+			.attr("x", x(format.parse((d.yearEnd).toString())))
+			.attr("y", miniHeight/2 - 7)
+			.text(d.yearEnd);
+		}
+
+		// ACQUIRED
+		// only show year if not already shown
+		if ((d.yearEnd != d.yearAcquired) && (d.yearStart != d.yearAcquired) && ((d.yearAcquired - d.yearEnd) > 9) && ((d.exhibitStart - d.yearAcquired) > 9)) 
+		{
+	    	miniTimeline.append("text")
+	    		.attr("class", "tooltip")
+	    		.attr("x", x(format.parse((d.yearAcquired).toString())))
+	    		.attr("y", miniHeight/2 - 7)
+	    		.text(d.yearAcquired);
+		}
+
+		
+		// EXHIBITED
+		// if exhibit spans single year
+		if (d.exhibitStart === d.exhibitEnd) 
+		{
+			miniTimeline.append("text")
+			.attr("class", "tooltip")
+			.attr("x", x(format.parse((d.exhibitStart).toString())))
+			.attr("y", miniHeight/2 - 7)
+			.text(d.exhibitStart);
+		}
+		// if exhibit spans less than 5 years
+		else if ((d.exhibitStart - d.exhibitEnd) <= 5 && d.exhibitStart != d.exhibitEnd) 
+		{	miniTimeline.append("text")
+			.attr("class", "tooltip")
+			.attr("x", x(format.parse((d.exhibitStart).toString())))
+			.attr("y", miniHeight/2 - 7)
+			.text(d.exhibitStart + " - " + d.exhibitEnd);
+		}
+		// if exhibit spans more than 5 years
+		else if ((d.exhibitEnd - d.exhibitStart) > 5) {
+			miniTimeline.append("text")
+			.attr("class", "tooltip")
+			.attr("x", x(format.parse((d.exhibitStart).toString())))
+			.attr("y", miniHeight/2 - 7)
+			.text(d.exhibitStart);
+
+			miniTimeline.append("text")
+			.attr("class", "tooltip")
+			.attr("x", x(format.parse((d.exhibitEnd).toString())))
+			.attr("y", miniHeight/2 - 7)
+			.text(d.exhibitEnd);
+		}
 	}
-	// if created spans less than 5 years
-	else if ((d.yearEnd - d.yearStart) <= 5) {
-		miniTimeline.append("text")
-		.attr("class", "tooltip")
-		.attr("x", x(format.parse((d.yearStart).toString())))
-		.attr("y", miniHeight/2 - 7)
-		.text(d.yearStart + " - " + d.yearEnd);
-	}
-	// if created spans more than 5 years
-	if ((d.yearEnd - d.yearStart) > 5) {
-		miniTimeline.append("text")
-		.attr("class", "tooltip")
-		.attr("x", x(format.parse((d.yearStart).toString())))
-		.attr("y", miniHeight/2 - 7)
-		.text(d.yearStart);
-
-		miniTimeline.append("text")
-		.attr("class", "tooltip")
-		.attr("x", x(format.parse((d.yearEnd).toString())))
-		.attr("y", miniHeight/2 - 7)
-		.text(d.yearEnd);
-	}
-
-	// ACQUIRED
-	// only show year if not already shown
-	if (d.yearEnd != d.yearAcquired || d.yearStart != d.yearAcquired) {
-    	miniTimeline.append("text")
-    		.attr("class", "tooltip")
-    		.attr("x", x(format.parse((d.yearAcquired).toString())))
-    		.attr("y", miniHeight/2 - 7)
-    		.text(d.yearAcquired);
-	}
-
-	
-	// EXHIBITED
-	// if exhibit spans single year
-	if (d.exhibitStart === d.exhibitEnd) {
-		miniTimeline.append("text")
-		.attr("class", "tooltip")
-		.attr("x", x(format.parse((d.exhibitStart).toString())))
-		.attr("y", miniHeight/2 - 7)
-		.text(d.exhibitStart);
-	}
-	// if exhibit spans less than 5 years
-	else if ((d.exhibitStart - d.exhibitEnd) <= 5) {
-		miniTimeline.append("text")
-		.attr("class", "tooltip")
-		.attr("x", x(format.parse((d.exhibitStart).toString())))
-		.attr("y", miniHeight/2 - 7)
-		.text(d.exhibitStart + " - " + d.exhibitEnd);
-	}
-	// if exhibit spans more than 5 years
-	if ((d.exhibitEnd - d.exhibitStart) > 5) {
-		miniTimeline.append("text")
-		.attr("class", "tooltip")
-		.attr("x", x(format.parse((d.exhibitStart).toString())))
-		.attr("y", miniHeight/2 - 7)
-		.text(d.exhibitStart);
-
-		miniTimeline.append("text")
-		.attr("class", "tooltip")
-		.attr("x", x(format.parse((d.exhibitEnd).toString())))
-		.attr("y", miniHeight/2 - 7)
-		.text(d.exhibitEnd);
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	//     RANDOM RELATED OBJECTS     //
-
-	// 5 random related objects
-	var randomObjectSet = [];
-	for (i = 0; i < 5; i++) {
-		randomObjectSet.push(randomObjectObject(matchedObjects, d))
-	};
-
-
-	// WHY DOES THIS NOT APPEARING A SECOND TIME????
-	var imageSVG = d3.select("#objDetailBox")
-			.append("svg")
-			.attr("id","matchObjects")
-			.attr("width", 310)
-			.attr("height", 60);
-
-	imageSVG.selectAll(".matchImage")
-		.data(randomObjectSet)
-		.enter()
-		.append("svg:image")
-		.attr("class", "matchImage")
-    	.attr("x", function(d,i) {
-			return (i)*62 + 3;
-		})
-		.attr("y", 3)
-		.attr("width","48px")
-		.attr("height","48px")
-		.attr("xlink:href", function(d) {
-			return d.imageSQ;
-		});
-
-	imageSVG.selectAll("rect")
-		.data(randomObjectSet)
-		.enter()
-		.append("rect")
-    	.attr("x", function(d,i) {
-			return (i)*62;
-		})
-		.attr("y", 0)
-		.attr("width","54px")
-		.attr("height","54px")
-		.attr("stroke",function(d){
-			if (d.yearAcquired == acquiredMatch) {
-				return "orange";
-			} else if (d.yearStart == startMatch || d.yearEnd == endMatch) {
-				return "teal";
-			} else if (d.exhibitTitle == exhibitMatch) {
-				return "purple";
-			}
-		})
-		.attr("fill","none");
-
-
-	d3.selectAll(".matchImage").on("click", function(d) {
-		generateObjectView(d);
-	});
-
 }
-
-
 
