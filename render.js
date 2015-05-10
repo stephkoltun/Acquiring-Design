@@ -782,10 +782,8 @@ function generateObjectView(d) {
 	}
 
 
-
-
 	// call function to filter matching objects
-	var matchedObjects = filterMatchedObjects(d);
+	//var matchedObjects = filterMatchedObjects(d);
 
 
 
@@ -799,7 +797,7 @@ function generateObjectView(d) {
 	
 	$("body").append("<div id='objDetailFade'><div id='objDetailBox'><img class='closeImg' src='images/close.png'><img class='detailImage' src=" + d.imageURL + " ></img><div class='timeline'></div><h1>" + d.objTitle + "</h1><p>This was created by <a href=''>" + d.designer + createdHTML + "It was acquired by the Cooper Hewitt in <a href=''>" + d.yearAcquired + "</a>. During <a href=''>" + d.exhibitStart + "</a>, it was part of the <a href=''>" + d.exhibitTitle + "</a> exhibition.</p><p class='description'>" + d.objDescription + "</p></div></div>");
 
-	renderRandomObjects(matchedObjects, d);
+	renderRandomObjects(d);
 
 	renderTimeline(d);
 	
@@ -818,7 +816,9 @@ function generateObjectView(d) {
 
 // ----- RANDOM OBJECTS ----- //
 
-function renderRandomObjects(matchedObjects, d) {
+function renderRandomObjects(d) {
+
+	var matchedObjects = filterMatchedObjects(d);
 
 	var acquiredMatch = d.yearAcquired;
 	var startMatch = d.yearStart;
