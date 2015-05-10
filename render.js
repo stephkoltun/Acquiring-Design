@@ -157,6 +157,7 @@ function makeGraph() {
 			return y(key);
 		});
 
+
 	var acquiredMarker = objects.append("circle") //year acquired
 		.attr("class","acquired")
 		.attr("cx", xYearAcquiredMap)
@@ -164,6 +165,9 @@ function makeGraph() {
 			return y(key);
 		})
 		.attr("r","2.5px");
+
+
+	
 
 	
 
@@ -183,8 +187,55 @@ function makeGraph() {
 		})
 		.transition()
 		.duration(1000)
-		.attr("transform", function(d, i) {
-			return "translate(" + margin.left + "," + y(i) + margin.top + ")";
+		.attr("transform", function(d, key) {
+			return "translate(" + margin.left + "," + margin.top + ")";
+		});
+
+		d3.selectAll(".lines")
+		.transition()
+		.duration(1000)
+		.attr("y1", function(d, key) {
+			return y(key);
+		})
+		.attr("y2", function(d, key) {
+			return y(key);
+		});
+
+		d3.selectAll(".obj-trigger")
+		.transition()
+		.duration(1000)
+		.attr("y1", function(d, key) {
+			return y(key);
+		})
+		.attr("y2", function(d, key) {
+			return y(key);
+		});
+
+		d3.selectAll(".created")
+		.transition()
+		.duration(1000)
+		.attr("y1", function(d, key) {
+			return y(key);
+		})
+		.attr("y2", function(d, key) {
+			return y(key);
+		});
+
+		d3.selectAll(".acquired")
+		.transition()
+		.duration(1000)
+		.attr("cy", function(d, key) {
+			return y(key);
+		});
+
+		d3.selectAll(".exhibited")
+		.transition()
+		.duration(1000)
+		.attr("y1", function(d, key) {
+			return y(key);
+		})
+		.attr("y2", function(d, key) {
+			return y(key);
 		});
 	})
 
@@ -198,8 +249,55 @@ function makeGraph() {
 		})
 		.transition()
 		.duration(1000)
-		.attr("transform", function(d, i) {
-			return "translate(" + margin.left + "," + y(i) + margin.top + ")";
+		.attr("transform", function(d, key) {
+			return "translate(" + margin.left + "," + margin.top + ")";
+		});
+
+		d3.selectAll(".lines")
+		.transition()
+		.duration(1000)
+		.attr("y1", function(d, key) {
+			return y(key);
+		})
+		.attr("y2", function(d, key) {
+			return y(key);
+		});
+
+		d3.selectAll(".obj-trigger")
+		.transition()
+		.duration(1000)
+		.attr("y1", function(d, key) {
+			return y(key);
+		})
+		.attr("y2", function(d, key) {
+			return y(key);
+		});
+
+		d3.selectAll(".created")
+		.transition()
+		.duration(1000)
+		.attr("y1", function(d, key) {
+			return y(key);
+		})
+		.attr("y2", function(d, key) {
+			return y(key);
+		});
+
+		d3.selectAll(".acquired")
+		.transition()
+		.duration(1000)
+		.attr("cy", function(d, key) {
+			return y(key);
+		});
+
+		d3.selectAll(".exhibited")
+		.transition()
+		.duration(1000)
+		.attr("y1", function(d, key) {
+			return y(key);
+		})
+		.attr("y2", function(d, key) {
+			return y(key);
 		});
 	})
 
@@ -209,12 +307,60 @@ function makeGraph() {
 
 		d3.selectAll(".object")
 		.sort(function(a, b) {
-			return d3.ascending(a.exhibitStart, b.exhibitStart);
+			return d3.ascending(a.exhibitEnd, b.exhibitEnd);
 		})
+		.order()
 		.transition()
 		.duration(1000)
-		.attr("transform", function(d, i) {
-			return "translate(" + margin.left + "," + y(i) + margin.top + ")";
+		.attr("transform", function(d, key) {
+			return "translate(" + margin.left + "," + margin.top + ")";
+		});
+
+		d3.selectAll(".lines")
+		.transition()
+		.duration(1000)
+		.attr("y1", function(d, key) {
+			return y(key);
+		})
+		.attr("y2", function(d, key) {
+			return y(key);
+		});
+
+		d3.selectAll(".obj-trigger")
+		.transition()
+		.duration(1000)
+		.attr("y1", function(d, key) {
+			return y(key);
+		})
+		.attr("y2", function(d, key) {
+			return y(key);
+		});
+
+		d3.selectAll(".created")
+		.transition()
+		.duration(1000)
+		.attr("y1", function(d, key) {
+			return y(key);
+		})
+		.attr("y2", function(d, key) {
+			return y(key);
+		});
+
+		d3.selectAll(".acquired")
+		.transition()
+		.duration(1000)
+		.attr("cy", function(d, key) {
+			return y(key);
+		});
+
+		d3.selectAll(".exhibited")
+		.transition()
+		.duration(1000)
+		.attr("y1", function(d, key) {
+			return y(key);
+		})
+		.attr("y2", function(d, key) {
+			return y(key);
 		});
 	})
 
@@ -305,8 +451,8 @@ function makeGraph() {
     		.attr("xlink:href",d.imageSQ)
     		.style("opacity","0")
     		.transition()
-		    .delay(200)
-		    .duration(550)
+    		.delay(100)
+		    .duration(250)
 		    .style('opacity','1');
 
 
@@ -511,7 +657,6 @@ function makeGraph() {
     	.remove();
 
     	d3.select(this).selectAll(".hoverImage")
-    	.style('opacity','1')
 		.transition()
     	.duration(250)
     	.style('opacity','0')
