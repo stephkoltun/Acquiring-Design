@@ -574,13 +574,23 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
   background-color: #ff7735;
   padding: 0;
   margin: 0;
-  cursor: default;
+  cursor: pointer;
+}
+/* line 450, scss/styles.scss */
+.resort .notpressed {
   color: white;
   font-family: "Akkurat-Light";
   font-size: 1em;
 }
-/* line 456, scss/styles.scss */
+/* line 458, scss/styles.scss */
 .resort button:hover, .resort button:active, .resort button:focus {
+  color: #333333;
+  font-family: "Akkurat";
+  font-size: 1em;
+  cursor: pointer;
+}
+/* line 467, scss/styles.scss */
+.resort .pressed {
   color: #333333;
   font-family: "Akkurat";
   font-size: 1em;
@@ -588,7 +598,7 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
 }
 
 /*--------- OBJECT DETAIL VIEW ---------*/
-/* line 472, scss/styles.scss */
+/* line 483, scss/styles.scss */
 #objDetailFade {
   height: 100%;
   width: 100%;
@@ -599,7 +609,7 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
   top: 0;
 }
 
-/* line 484, scss/styles.scss */
+/* line 495, scss/styles.scss */
 #objDetailBox {
   width: 350px;
   z-index: 201;
@@ -616,7 +626,7 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
-/* line 506, scss/styles.scss */
+/* line 517, scss/styles.scss */
 #objDetailBox h1 {
   padding: 0 0 10px 0;
   margin: 0 20px;
@@ -625,7 +635,7 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
   font-size: .8em;
   text-transform: capitalize;
 }
-/* line 519, scss/styles.scss */
+/* line 530, scss/styles.scss */
 #objDetailBox h2 {
   padding: 0;
   margin: 0;
@@ -633,7 +643,7 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
   font-family: "Akkurat-Light";
   font-size: .8em;
 }
-/* line 530, scss/styles.scss */
+/* line 541, scss/styles.scss */
 #objDetailBox p {
   margin: 0 20px;
   padding-bottom: 10px;
@@ -642,36 +652,36 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
   font-size: .8em;
   line-height: 1.6;
 }
-/* line 542, scss/styles.scss */
+/* line 553, scss/styles.scss */
 #objDetailBox p.description {
   font-family: "Akkurat-LightItalic";
   color: #ababab;
 }
-/* line 549, scss/styles.scss */
+/* line 560, scss/styles.scss */
 #objDetailBox a, #objDetailBox a:hover, #objDetailBox a:visited {
   color: #ababab;
   text-decoration: underline;
 }
 @media screen and (min-height: 600px) {
-  /* line 484, scss/styles.scss */
+  /* line 495, scss/styles.scss */
   #objDetailBox {
     max-height: 500px;
   }
 }
 @media screen and (min-height: 750px) {
-  /* line 484, scss/styles.scss */
+  /* line 495, scss/styles.scss */
   #objDetailBox {
     max-height: 650px;
   }
 }
 @media screen and (min-height: 900px) {
-  /* line 484, scss/styles.scss */
+  /* line 495, scss/styles.scss */
   #objDetailBox {
     max-height: 750px;
   }
 }
 
-/* line 570, scss/styles.scss */
+/* line 581, scss/styles.scss */
 .closeImg {
   position: absolute;
   right: 0;
@@ -682,7 +692,7 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
   opacity: .3;
 }
 
-/* line 580, scss/styles.scss */
+/* line 591, scss/styles.scss */
 .detailImage {
   width: 310px;
   max-height: 400px;
@@ -691,41 +701,41 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
   padding: 20px 20px 10px 20px;
 }
 
-/* line 589, scss/styles.scss */
+/* line 600, scss/styles.scss */
 .timeline {
   margin: 0 auto;
   width: 310px;
   padding-bottom: 15px;
 }
 
-/* line 595, scss/styles.scss */
+/* line 606, scss/styles.scss */
 #matchObjects {
   padding: 5px;
   margin: 10px 15px;
 }
 
-/* line 601, scss/styles.scss */
+/* line 612, scss/styles.scss */
 .matchAcquired {
   box-shadow: 0 0 0 2px orange;
 }
 
-/* line 605, scss/styles.scss */
+/* line 616, scss/styles.scss */
 .matchCreated {
   box-shadow: 0 0 0 2px teal;
 }
 
-/* line 609, scss/styles.scss */
+/* line 620, scss/styles.scss */
 .matchExhibit {
   box-shadow: 0 0 0 2px purple;
 }
 
-/* line 613, scss/styles.scss */
+/* line 624, scss/styles.scss */
 #miniTime {
   margin-top: 10px;
 }
 
 /*--------- MAIN BLOG PAGE ---------*/
-/* line 621, scss/styles.scss */
+/* line 632, scss/styles.scss */
 .clear {
   clear: both;
   line-height: 0;

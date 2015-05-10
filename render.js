@@ -178,8 +178,15 @@ function makeGraph() {
 	/* ------ SORTING FUNCTIONS THAT SORT OF WORK ------ */
 
 
+
 	d3.select("#sortCreated").on("click", function() {
 		console.log("resorting by year created");
+
+		//adjust colors in nav bar
+		$("#sortCreated").switchClass("notpressed","pressed", 0);
+		$("#sortExhibited").switchClass("pressed","notpressed", 0);
+		$("#sortAcquired").switchClass("pressed","notpressed", 0);
+
 
 		d3.selectAll(".object")
 		.sort(function(a, b) {
@@ -243,6 +250,12 @@ function makeGraph() {
 	d3.select("#sortAcquired").on("click", function() {
 		console.log("resorting by year acquired");
 
+		//adjust colors in nav bar
+		$("#sortAcquired").switchClass("notpressed","pressed", 0);
+		$("#sortExhibited").switchClass("pressed","notpressed", 0);
+		$("#sortCreated").switchClass("pressed","notpressed", 0);
+
+
 		d3.selectAll(".object")
 		.sort(function(a, b) {
 			return d3.ascending(a.yearAcquired, b.yearAcquired);
@@ -304,6 +317,12 @@ function makeGraph() {
 
 	d3.select("#sortExhibited").on("click", function() {
 		console.log("resorting by year exhibited");
+
+		//adjust colors in nav bar
+		$("#sortExhibited").switchClass("notpressed","pressed",0);
+		$("#sortAcquired").switchClass("pressed","notpressed",0);
+		$("#sortCreated").switchClass("pressed","notpressed",0);
+
 
 		d3.selectAll(".object")
 		.sort(function(a, b) {

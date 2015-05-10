@@ -9,7 +9,10 @@
 	<title>Acquiring Design: Visualizing the Cooper Hewitt's Collection</title>
 	<meta name="description" content="Drawing from the Cooper Hewitt Smithsonian Design Museum's collection, Acquiring Design visualizes the ongoing development of its collection and relationships between objects. By presenting the collection as a series of object-relationships over time, the project attempts to uncover trends across mediums, geography, designers, and museum departments.">
 
+	<!-- CDN Jquery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<!-- CDN Jquery UI -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="d3/d3.v3.js"></script>
 	
 
@@ -56,9 +59,9 @@
 	<div id="arrange">
 		<h2>sort by</h2>
 		<ul>
-			<li class="resort"><button id="sortCreated">date created</button></li>
-			<li class="resort"><button id="sortAcquired">date acquired</button></li>
-			<li class="resort"><button id="sortExhibited">date exhibited</button></li>
+			<li class="resort"><button class="notpressed" id="sortCreated">date created</button></li>
+			<li class="resort"><button class="pressed" id="sortAcquired">date acquired</button></li>
+			<li class="resort"><button class="notpressed" id="sortExhibited">date exhibited</button></li>
 		</ul>
 	</div>
 

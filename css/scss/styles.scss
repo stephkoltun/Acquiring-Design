@@ -444,8 +444,10 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
 		background-color: lighten($color-orange,5%);
 		padding: 0;
 		margin: 0;
-		cursor: default;
+		cursor: pointer;
+	}
 
+	.notpressed {
 		color: white;
 		font: {
 			family: "Akkurat-Light";
@@ -455,6 +457,15 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
 
 	button:hover, button:active, button:focus {
 		color: $color-main;
+  		font: {
+			family: "Akkurat";
+			size: 1em;
+		}
+  		cursor: pointer;
+	 }
+
+	 .pressed {
+	 	color: $color-main;
   		font: {
 			family: "Akkurat";
 			size: 1em;
