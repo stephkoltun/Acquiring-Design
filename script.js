@@ -20,7 +20,7 @@ var objectsIDList = [
 18733541,18638839,18647243,18712511,18756025,18655795,18690599,18713685,
 18710261,18714235,68267959,18707305,18700467,18707303,18701169,18714667,
 18710577,18705947,18710253,18710251,18729965,18732835,18731347,68515679,
-18716171,18731063,18757383,18731245,18788349,68268333,51497205,18556803];
+18716171,18731063,18757383,18788349,68268333,51497205,18556803];
 
 
 
@@ -57,6 +57,8 @@ for (i = 0; i < objectsIDList.length; i++) {
 		/* ------ AJAX REQUEST - returns JSON ------ */
 
 		var url ='https://api.collection.cooperhewitt.org/rest/?method=cooperhewitt.objects.getInfo&access_token=' + token + '&object_id=' + objectsIDList[i] +"&extras=exhibitions";
+		console.log("AJAX requrest starting");
+
 
 		var request = $.get(url, function( response ) {
 			var objResponse = response; // variable to hold the response
