@@ -125,7 +125,7 @@ function makeGraph() {
 		});
 
 	var lines = objects.append("line") //overall connection line for each obj
-		.attr("class","lines") // set class for CSS styling
+		//.attr("class","lines") // set class for CSS styling
 		.attr("x1", xYearStartMap)
 		.attr("y1", function(d, key) {
 			return y(key);
@@ -133,9 +133,13 @@ function makeGraph() {
 		.attr("x2", xExhibitEndMap)
 		.attr("y2", function(d, key) {
 			return y(key);
+		})
+		.style("stroke-width", "3px")
+		.style("stroke", function(d) {
+			return d.objColor;
 		});
 
-	var createdMarker = objects.append("line") //years created
+	/*var createdMarker = objects.append("line") //years created
 		.attr("class","created") 
 		.attr("x1", xYearStartMap)
 		.attr("y1", function(d, key) {
@@ -164,7 +168,7 @@ function makeGraph() {
 		.attr("cy", function(d, key) {
 			return y(key);
 		})
-		.attr("r","2.5px");
+		.attr("r","2.5px");*/
 
 
 	

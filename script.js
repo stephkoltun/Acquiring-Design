@@ -47,7 +47,8 @@ for (i = 0; i < objectsIDList.length; i++) {
 			imageURL: "null",
 			imageSQ: "null",
 			designer: "Jane Smith",
-			objDescription: "null"
+			objDescription: "null",
+			objColor: "#ffffff"
 		};
  
 		
@@ -56,8 +57,7 @@ for (i = 0; i < objectsIDList.length; i++) {
 
 		/* ------ AJAX REQUEST - returns JSON ------ */
 
-		var url ='https://api.collection.cooperhewitt.org/rest/?method=cooperhewitt.objects.getInfo&access_token=' + token + '&object_id=' + objectsIDList[i] +"&extras=exhibitions";
-		console.log("AJAX requrest starting");
+		var url ='https://api.collection.cooperhewitt.org/rest/?method=cooperhewitt.objects.getInfo&access_token=' + token + '&object_id=' + objectsIDList[i] +"&extras=exhibitions,colors";
 
 
 		var request = $.get(url, function( response ) {
@@ -83,6 +83,14 @@ for (i = 0; i < objectsIDList.length; i++) {
 				objData.designer = obj.participants[designerIndex].person_name;
 			} else {
 				console.log (obj.id + " has no associated people.");
+			}
+
+			// assign color value
+			if (obj.colors != 0) {
+				objData.objColor = obj.colors[0].color;
+			}
+			else {
+				console.log(obj.id + " has no color.");
 			}
 
 
