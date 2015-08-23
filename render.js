@@ -1,6 +1,7 @@
 function makeGraph() {
 
 
+
 	/* ------ SET UP VARIABLES AND DATA FUNCTIONS ------ */
 
 	var margin = {top: 30, right: 20, bottom: 30, left: 50},

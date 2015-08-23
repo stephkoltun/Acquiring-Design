@@ -30,20 +30,25 @@ var objectsIDList = [
 
 /* ------ AJAX REQUEST - returns JSON ------ */
 
-		var urlObjects ='https://api.collection.cooperhewitt.org/rest/?method=cooperhewitt.search.objects&access_token=' + token + '&has_images=HAS_IMAGES&year_acquired=gte1880&year_end=gte1880&year_start=gte1880&page=1&per_page=' + objectsTotal;
+		var urlObjects ='https://api.collection.cooperhewitt.org/rest/?method=cooperhewitt.search.objects&access_token=' + token + '&has_images=HAS_IMAGES&year_acquired=gte1900&year_end=gte1900&year_start=gte1900&page=1&per_page=' + objectsTotal;
 		
 		
 
+		$.ajax({
+        	url: urlObjects,
+        	success: function (response) {
 
-		var request = $.get(urlObjects, function(response) {
-			console.log("AJAX requrest starting");
+				console.log("AJAX requrest successful");
 
-			var objResponse = response; // variable to hold the response
-			var allObjects = objResponse.objects;
+				var objResponse = response; // variable to hold the response
+				var allObjects = objResponse.objects;
 
-			allObjectsDataset = allObjects;
-			
-			done();
+				for (i = 0; i < allObjects.length; i++) {
+					allObjectsDataset.push(allObjects[i]);
+					console.log(allObjects[i]);
+					done();
+				}
+			}
 			
 			/*done();
 
@@ -61,6 +66,7 @@ var objectsIDList = [
 
 		
 		}); // end main AJAX request
+
 
 
 /*for (i = 0; i < objectsIDList.length; i++) {
@@ -150,7 +156,7 @@ var objectsIDList = [
 /* ------ FUNCTION FOR PROCESSING THE API DATA ------ */
 
 //run after function with callback function and length of object array
-var done = after(makeGraph, 100);
+var done = after(makeGraph, 99);
 
 
 // AFTER LOOPING THROUGH ID LIST AND COMPLETING AJAX REQUESTS...
