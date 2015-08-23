@@ -1,10 +1,11 @@
 
 //Cooper Hewitt API token 
 var token = "2907bb23a319de02d7174829a85eef94";
+var objectsTotal = 100;
 
 var allObjectsDataset = [];
 
-//Random Selection of Objects
+/*//Random Selection of Objects
 var objectsIDList = [
 18669933,18189629,18562505,18345093,18670531,18503555,18670541,18804487,
 18475233,18384975,18710753,18343489,18431555,18189989,18386953,18189975,
@@ -20,19 +21,53 @@ var objectsIDList = [
 18733541,18638839,18647243,18712511,18756025,18655795,18690599,18713685,
 18710261,18714235,68267959,18707305,18700467,18707303,18701169,18714667,
 18710577,18705947,18710253,18710251,18729965,18731347,68515679,
-18716171,18731063,18757383,18788349,68268333,51497205,18556803];
+18716171,18731063,18757383,18788349,68268333,51497205,18556803];*/
 
 
 
 
 /* ------ CREATE OBJECT FOR EACH ITEM IN COLLECTION ------ */
 
+/* ------ AJAX REQUEST - returns JSON ------ */
 
-for (i = 0; i < objectsIDList.length; i++) {
+		var urlObjects ='https://api.collection.cooperhewitt.org/rest/?method=cooperhewitt.search.objects&access_token=' + token + '&has_images=HAS_IMAGES&year_acquired=gte1880&year_end=gte1880&year_start=gte1880&page=1&per_page=' + objectsTotal;
+		
+		
+
+
+		var request = $.get(urlObjects, function(response) {
+			console.log("AJAX requrest starting");
+
+			var objResponse = response; // variable to hold the response
+			var allObjects = objResponse.objects;
+
+			allObjectsDataset = allObjects;
+			
+			done();
+			
+			/*done();
+
+			for (i = 0; i < allObjects.length; i++) {
+
+				(function (i) {
+
+					var urlExhibit = 'https://api.collection.cooperhewitt.org/rest/?method=cooperhewitt.objects.getInfo&access_token=' + token + '&object_id=' + allObjects[i].object_id + '&extras=exhibitions';
+
+					var exhibitRequest = $.get(urlExhibit, function (exhibResponse) {
+						console.log(exhibResponse);
+					})
+				})(i);	
+			}*/
+
+		
+		}); // end main AJAX request
+
+
+/*for (i = 0; i < objectsIDList.length; i++) {
 
 	(function (i) {
 		
-		/* ------ DEFINE COLLECTION OBJECT ------ */
+		// ------ DEFINE COLLECTION OBJECT ------ 
 		var objData = { 
 			key: i,
 			objTitle: "tempobjTitle",
@@ -50,19 +85,10 @@ for (i = 0; i < objectsIDList.length; i++) {
 			objDescription: "null"
 		};
  
+
+
+
 		
-
-
-
-		/* ------ AJAX REQUEST - returns JSON ------ */
-
-		var url ='https://api.collection.cooperhewitt.org/rest/?method=cooperhewitt.objects.getInfo&access_token=' + token + '&object_id=' + objectsIDList[i] +"&extras=exhibitions";
-		console.log("AJAX requrest starting");
-
-
-		var request = $.get(url, function( response ) {
-			var objResponse = response; // variable to hold the response
-			var obj = objResponse.object;
 
 			objData.objTitle = obj.title;
 			objData.objDescription = obj.description;
@@ -118,13 +144,13 @@ for (i = 0; i < objectsIDList.length; i++) {
 			done(); // invoke done function to check if all objs processed
 		}); //End AJAX request
 	})(i);
-}
+}*/
 
-
+//done();
 /* ------ FUNCTION FOR PROCESSING THE API DATA ------ */
 
 //run after function with callback function and length of object array
-var done = after(makeGraph, objectsIDList.length);
+var done = after(makeGraph, 100);
 
 
 // AFTER LOOPING THROUGH ID LIST AND COMPLETING AJAX REQUESTS...

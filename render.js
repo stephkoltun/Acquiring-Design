@@ -26,16 +26,16 @@ function makeGraph() {
 
 	// Scale and map date value functions
 	// convert number year to string, and format for d3
-	var xYearStart = function(d) { return format.parse((d.yearStart).toString());}, 
+	var xYearStart = function(d) { return format.parse((d.year_start).toString());}, 
 	    xYearStartMap = function(d) { return x(xYearStart(d));}; // data -> display
 
-	var xYearEnd = function(d) { return format.parse((d.yearEnd).toString());}, // data -> value
+	var xYearEnd = function(d) { return format.parse((d.year_end).toString());}, // data -> value
 	    xYearEndMap = function(d) { return x(xYearEnd(d));}; // data -> display
 
-	var xYearAcquired = function(d) { return format.parse(d.yearAcquired);},
+	var xYearAcquired = function(d) { return format.parse(d.year_acquired);},
 		xYearAcquiredMap = function(d) { return x(xYearAcquired(d));}; // data -> display
 
-	//check if exhibition dates are numbers or strings
+	/*//check if exhibition dates are numbers or strings
 	var xExhibitEnd = function(d) { if (isNaN(d.exhibitEnd)) {
 				return format.parse(d.exhibitEnd);
 			} else {
@@ -47,7 +47,7 @@ function makeGraph() {
 			} else {
 				return format.parse((d.exhibitStart).toString());
 			}},
-		xExhibitStartMap = function(d) { return x(xExhibitStart(d));}; // data -> display
+		xExhibitStartMap = function(d) { return x(xExhibitStart(d));}; // data -> display*/
 
 
 	// Define axes
@@ -92,7 +92,7 @@ function makeGraph() {
 
 	// SORT DATA BY YEAR TYPES
 	var sortedByAcquired = allObjectsDataset.sort(function(a, b) {
-		return d3.ascending(a.yearAcquired, b.yearAcquired);
+		return d3.ascending(a.year_acquired, b.year_acquired);
 	});
 	
 
@@ -119,7 +119,7 @@ function makeGraph() {
 		.attr("y1", function(d, key) {
 			return y(key);
 		})
-		.attr("x2", xExhibitEndMap)
+		.attr("x2", xYearAcquiredMap) // should be ("x2", xExhibitEndMap)
 		.attr("y2", function(d, key) {
 			return y(key);
 		});
@@ -130,7 +130,7 @@ function makeGraph() {
 		.attr("y1", function(d, key) {
 			return y(key);
 		})
-		.attr("x2", xExhibitEndMap)
+		.attr("x2", xYearAcquiredMap) // should be ("x2", xExhibitEndMap)
 		.attr("y2", function(d, key) {
 			return y(key);
 		});
@@ -146,7 +146,7 @@ function makeGraph() {
 			return y(key);
 		});
 
-	var exhibitedMarker = objects.append("line") //years exhibited
+/*	var exhibitedMarker = objects.append("line") //years exhibited
 		.attr("class","exhibited") 
 		.attr("x1", xExhibitStartMap)
 		.attr("y1", function(d, key) {
@@ -155,7 +155,7 @@ function makeGraph() {
 		.attr("x2", xExhibitEndMap)
 		.attr("y2", function(d, key) {
 			return y(key);
-		});
+		});*/
 
 
 	var acquiredMarker = objects.append("circle") //year acquired
@@ -190,7 +190,7 @@ function makeGraph() {
 
 		d3.selectAll(".object")
 		.sort(function(a, b) {
-			return d3.ascending(a.yearStart, b.yearStart);
+			return d3.ascending(a.year_start, b.year_start);
 		})
 		.transition()
 		.duration(1000)
@@ -258,7 +258,7 @@ function makeGraph() {
 
 		d3.selectAll(".object")
 		.sort(function(a, b) {
-			return d3.ascending(a.yearAcquired, b.yearAcquired);
+			return d3.ascending(a.year_acquired, b.year_acquired);
 		})
 		.transition()
 		.duration(1000)
