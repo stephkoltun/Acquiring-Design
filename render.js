@@ -35,7 +35,7 @@ function makeGraph() {
 	var xYearAcquired = function(d) { return format.parse(d.yearAcquired);},
 		xYearAcquiredMap = function(d) { return x(xYearAcquired(d));}; // data -> display
 
-	//check if exhibition dates are numbers or strings
+	/*//check if exhibition dates are numbers or strings
 	var xExhibitEnd = function(d) { if (isNaN(d.exhibitEnd)) {
 				return format.parse(d.exhibitEnd);
 			} else {
@@ -48,7 +48,7 @@ function makeGraph() {
 				return format.parse((d.exhibitStart).toString());
 			}},
 		xExhibitStartMap = function(d) { return x(xExhibitStart(d));}; // data -> display
-
+*/
 
 	// Define axes
 	var xAxis = d3.svg.axis().scale(x).orient("top").ticks(15).tickSize(8);
@@ -119,7 +119,7 @@ function makeGraph() {
 		.attr("y1", function(d, key) {
 			return y(key);
 		})
-		.attr("x2", xExhibitEndMap)
+		.attr("x2", xYearAcquiredMap) //.attr("x2", xExhibitEndMap)
 		.attr("y2", function(d, key) {
 			return y(key);
 		});
@@ -130,7 +130,7 @@ function makeGraph() {
 		.attr("y1", function(d, key) {
 			return y(key);
 		})
-		.attr("x2", xExhibitEndMap)
+		.attr("x2", xYearAcquiredMap) //.attr("x2", xExhibitEndMap)
 		.attr("y2", function(d, key) {
 			return y(key);
 		});
@@ -146,7 +146,7 @@ function makeGraph() {
 			return y(key);
 		});
 
-	var exhibitedMarker = objects.append("line") //years exhibited
+/*	var exhibitedMarker = objects.append("line") //years exhibited
 		.attr("class","exhibited") 
 		.attr("x1", xExhibitStartMap)
 		.attr("y1", function(d, key) {
@@ -155,7 +155,7 @@ function makeGraph() {
 		.attr("x2", xExhibitEndMap)
 		.attr("y2", function(d, key) {
 			return y(key);
-		});
+		});*/
 
 
 	var acquiredMarker = objects.append("circle") //year acquired
@@ -315,7 +315,7 @@ function makeGraph() {
 	})
 
 
-	d3.select("#sortExhibited").on("click", function() {
+	/*d3.select("#sortExhibited").on("click", function() {
 		console.log("resorting by year exhibited");
 
 		//adjust colors in nav bar
@@ -382,7 +382,7 @@ function makeGraph() {
 			return y(key);
 		});
 	})
-
+*/
 
 
 
