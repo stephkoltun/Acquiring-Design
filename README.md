@@ -1,1 +1,1 @@
-http://anothersideproject.co
+http://acquiringdesign.co

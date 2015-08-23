@@ -19,7 +19,7 @@ var objectsIDList = [
 18732295,68243989,18805581,18621779,18733539,18705525,18705523,18639709,
 18733541,18638839,18647243,18712511,18756025,18655795,18690599,18713685,
 18710261,18714235,68267959,18707305,18700467,18707303,18701169,18714667,
-18710577,18705947,18710253,18710251,18729965,18732835,18731347,68515679,
+18710577,18705947,18710253,18710251,18729965,18731347,68515679,
 18716171,18731063,18757383,18788349,68268333,51497205,18556803];
 
 
@@ -108,10 +108,12 @@ for (i = 0; i < objectsIDList.length; i++) {
 			}
 
 			// only add objects that have date values	
-			if (objData.yearStart != null && obj.exhibitions.length != 0 && obj.images != 0) {
+			//&& obj.exhibitions.length != 0
+			if (objData.yearStart != null  && obj.images != 0) {
 				allObjectsDataset.push(objData); // add object to full dataset
 			}
 
+			console.log(objData);
 			
 			done(); // invoke done function to check if all objs processed
 		}); //End AJAX request
