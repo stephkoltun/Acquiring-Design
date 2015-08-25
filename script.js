@@ -40,10 +40,10 @@ for (i = 0; i < objectsIDList.length; i++) {
 			yearEnd: "tempDate", 
 			lifespan: "tempLife",
 			yearAcquired: "tempDate",
-			//hasBeenExhibited: false,
-			//exhibitEnd: "null",
-			//exhibitStart: "null",
-			//exhibitTitle: "null",
+			hasBeenExhibited: false,
+			exhibitEnd: "null",
+			exhibitStart: "null",
+			exhibitTitle: "null",
 			imageURL: "null",
 			imageSQ: "null",
 			designer: "Jane Smith",
@@ -92,7 +92,7 @@ for (i = 0; i < objectsIDList.length; i++) {
 			objData.yearAcquired = obj.year_acquired;	//year object acquired
 
 
-/*			// NOTE TO SELF: DEAL WITH MULTIPLE EXHIBITS!!!
+			// NOTE TO SELF: DEAL WITH MULTIPLE EXHIBITS!!!
 			if (obj.exhibitions.length != 0) { // object has been exhibited
 				hasBeenExhibited = true;
 				objData.exhibitTitle = obj.exhibitions[0].title;
@@ -106,10 +106,9 @@ for (i = 0; i < objectsIDList.length; i++) {
 			} else if (obj.exhibitions.length == 0){ // object has never been exhibited
 				objData.lifespan = objData.yearAcquired - objData.yearStart;
 			}
-*/
+
 			// only add objects that have date values	
-			//&& obj.exhibitions.length != 0
-			if (objData.yearStart != null  && obj.images != 0) {
+			if (objData.yearStart != null && obj.exhibitions.length != 0 && obj.images != 0) {
 				allObjectsDataset.push(objData); // add object to full dataset
 			}
 
