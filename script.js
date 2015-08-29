@@ -2,70 +2,82 @@
 //Cooper Hewitt API token 
 var token = "2907bb23a319de02d7174829a85eef94";
 var objectsTotal = 100;
+var startYear = "1960";
 
 var allObjectsDataset = [];
 
-/*//Random Selection of Objects
-var objectsIDList = [
-18669933,18189629,18562505,18345093,18670531,18503555,18670541,18804487,
-18475233,18384975,18710753,18343489,18431555,18189989,18386953,18189975,
-18630157,18622391,18384901,18464763,18464327,18638635,18801131,18488149,
-18630151,18631419,18631613,18710395,18407005,18643095,18480039,18706745,
-18648931,18479937,18397501,18704669,18636979,18612303,18624533,18678409,
-18451439,18397505,18447273,18646479,18635729,18644885,18684087,18649073,
-18490433,18398361,18407425,18637731,18638099,18637605,18388547,18643059,
-18653089,18617493,18451445,18444283,18400935,18410569,18636321,18420439,
-18636407,18430869,18478757,18648915,18621871,18617539,18710419,18732757,
-18615581,18618197,18637287,18498241,18498103,18632197,18637367,18643637,
-18732295,68243989,18805581,18621779,18733539,18705525,18705523,18639709,
-18733541,18638839,18647243,18712511,18756025,18655795,18690599,18713685,
-18710261,18714235,68267959,18707305,18700467,18707303,18701169,18714667,
-18710577,18705947,18710253,18710251,18729965,18731347,68515679,
-18716171,18731063,18757383,18788349,68268333,51497205,18556803];*/
 
 
-
-
-/* ------ CREATE OBJECT FOR EACH ITEM IN COLLECTION ------ */
+/* ------ QUERY COLLECTION FOR OBJECTS THAT HAVE IMAGES AND WERE CREATED AFTER SPECIFIED YEAR ------ */
 
 /* ------ AJAX REQUEST - returns JSON ------ */
 
-		var urlObjects ='https://api.collection.cooperhewitt.org/rest/?method=cooperhewitt.search.objects&access_token=' + token + '&has_images=HAS_IMAGES&year_acquired=gte1900&year_end=gte1900&year_start=gte1900&page=1&per_page=' + objectsTotal;
-		
-		
+var urlObjects ='https://api.collection.cooperhewitt.org/rest/?method=cooperhewitt.search.objects&access_token=' + token + '&has_images=HAS_IMAGES&year_acquired=gte' + startYear + '&year_end=gte' + startYear + '&year_start=gte' + startYear + '&page=1&per_page=' + objectsTotal + '&extras=exhibitions';
 
-		$.ajax({
-        	url: urlObjects,
-        	success: function (response) {
 
-				console.log("AJAX requrest successful");
 
-				var objResponse = response; // variable to hold the response
-				var allObjects = objResponse.objects;
+$.ajax({
+	url: urlObjects,
+	success: function (response) {
 
-				for (i = 0; i < allObjects.length; i++) {
-					allObjectsDataset.push(allObjects[i]);
-					console.log(allObjects[i]);
-					done();
-				}
-			}
-			
-			/*done();
+		console.log("AJAX requrest successful");
 
-			for (i = 0; i < allObjects.length; i++) {
+		var objResponse = response; // variable to hold the response
+		var allObjects = objResponse.objects;
 
-				(function (i) {
+		for (i = 0; i < allObjects.length; i++) {
+			allObjectsDataset.push(allObjects[i]);
+			console.log(allObjects[i]);
+			done();
+		}	
+	}
+}); // end main AJAX request
 
-					var urlExhibit = 'https://api.collection.cooperhewitt.org/rest/?method=cooperhewitt.objects.getInfo&access_token=' + token + '&object_id=' + allObjects[i].object_id + '&extras=exhibitions';
 
-					var exhibitRequest = $.get(urlExhibit, function (exhibResponse) {
-						console.log(exhibResponse);
-					})
-				})(i);	
-			}*/
 
-		
-		}); // end main AJAX request
+
+//run after function with callback function and length of object array
+var done = after(makeGraph, 100);
+
+
+// AFTER LOOPING THROUGH ID LIST AND COMPLETING AJAX REQUESTS...
+// checks if counter is equal to the length of objects being looped through
+function after(callback, count){
+	var counter = 0;
+	return function(){
+		if(++counter === count) {
+			counter = 0;
+
+			removeLoader();
+			callback();
+		}
+	};
+}
+
+
+
+
+/* ------ FUNCTIONS / EVENTS FOR LOADING SCREEN ------ */
+
+function removeLoader() {
+	$("button#loaded").fadeIn("slow");
+	$(".ball-clip-rotate").fadeOut("slow");
+	$(".ball-clip-rotate").remove();
+	$("button#loaded").click(function() {
+		$("#loader").fadeOut("slow");
+	});
+}
+
+// event listener to bring back "about" page
+$("#projectTitle").click(function() {
+	$("#loader").fadeIn("slow");
+});
+
+
+
+
+
+
 
 
 
@@ -153,44 +165,6 @@ var objectsIDList = [
 }*/
 
 //done();
-/* ------ FUNCTION FOR PROCESSING THE API DATA ------ */
-
-//run after function with callback function and length of object array
-var done = after(makeGraph, 99);
-
-
-// AFTER LOOPING THROUGH ID LIST AND COMPLETING AJAX REQUESTS...
-// checks if counter is equal to the length of objects being looped through
-function after(callback, count){
-	var counter = 0;
-	return function(){
-		if(++counter === count) {
-			counter = 0;
-
-			removeLoader();
-			callback();
-		}
-	};
-}
-
-
-
-
-/* ------ FUNCTIONS / EVENTS FOR LOADING SCREEN ------ */
-
-function removeLoader() {
-	$("button#loaded").fadeIn("slow");
-	$(".ball-clip-rotate").fadeOut("slow");
-	$(".ball-clip-rotate").remove();
-	$("button#loaded").click(function() {
-		$("#loader").fadeOut("slow");
-	});
-}
-
-// event listener to bring back "about" page
-$("#projectTitle").click(function() {
-	$("#loader").fadeIn("slow");
-});
 
 
 
