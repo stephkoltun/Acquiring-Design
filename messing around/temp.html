@@ -1,0 +1,53 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<!-- CDN Jquery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<!-- CDN Jquery UI -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+</head>
+
+<body>
+
+	<script type="text/javascript">
+
+	//Cooper Hewitt API token 
+	var token = "2907bb23a319de02d7174829a85eef94";
+	var objectsTotal = '1';
+	var year = "1999";
+	var deptID = '35347497';
+
+	var allObjectsDataset = [];
+
+
+	/* ------ QUERY COLLECTION FOR OBJECTS THAT HAVE IMAGES AND WERE CREATED AFTER SPECIFIED YEAR ------ */
+
+	/* ------ AJAX REQUEST - returns JSON ------ */
+
+	// var urlObjects ='https://api.collection.cooperhewitt.org/rest/?method=cooperhewitt.search.objects&access_token=' + token + '&department_id=' + deptID + '&year_acquired=' + year + '&page=1&per_page=' + objectsTotal;
+
+
+	for (i=2000; i<2011; i++) {
+
+		var urlObjects ='https://api.collection.cooperhewitt.org/rest/?method=cooperhewitt.search.objects&access_token=' + token + '&department_id=' + deptID + '&year_acquired=' + i + '&page=1&per_page=' + objectsTotal;
+
+		$.ajax({
+			url: urlObjects,
+			success: function (response) {
+
+				var objResponse = response; // variable to hold the response
+				console.log(objResponse.total);
+			
+			}
+		}); // end main AJAX request
+
+
+	}
+
+
+	
+
+	</script>
+
+</body>
