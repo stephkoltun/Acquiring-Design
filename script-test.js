@@ -38,7 +38,6 @@ for (i = 0; i < objectsIDList.length; i++) {
 			objTitle: "tempobjTitle",
 			yearStart:"tempDate", 
 			yearEnd: "tempDate", 
-			lifespan: "tempLife",
 			yearAcquired: "tempDate",
 			hasBeenExhibited: false,
 			exhibitEnd: "null",
@@ -48,7 +47,7 @@ for (i = 0; i < objectsIDList.length; i++) {
 			imageSQ: "null",
 			department: "tempDept",
 			designer: "Jane Smith",
-			objDescription: "null"
+			//objDescription: "null"
 		};
  
 		
@@ -65,7 +64,7 @@ for (i = 0; i < objectsIDList.length; i++) {
 			var obj = objResponse.object;
 
 			objData.objTitle = obj.title;
-			objData.objDescription = obj.description;
+			//objData.objDescription = obj.description;
 
 			
 
@@ -98,7 +97,6 @@ for (i = 0; i < objectsIDList.length; i++) {
 			if (obj.exhibitions.length != 0) { // object has been exhibited
 				hasBeenExhibited = true;
 				objData.exhibitTitle = obj.exhibitions[0].title;
-				objData.lifespan = objData.exhibitEnd - objData.yearStart;
 				objData.exhibitStart = obj.exhibitions[0].date_start.substring(0,4);
 				if (obj.exhibitions[0].is_active == 1) {
 					objData.exhibitEnd = 2015;
@@ -135,6 +133,7 @@ function after(callback, count){
 	return function(){
 		if(++counter === count) {
 			counter = 0;
+
 
 			removeLoader();
 			callback();
