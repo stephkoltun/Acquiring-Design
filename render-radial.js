@@ -66,8 +66,8 @@ function makeNetwork() {
 
 
 
-	for (i=0; i<allObjectsDataset.length; i++) {
-		var dataDept = allObjectsDataset[i].department;
+	for (i=0; i<sortedByAcquired.length; i++) {
+		var dataDept = sortedByAcquired[i].department;
 
 		// find corresponding department
 		for (var j=0; j<collectionByDept.children.length; j++) {
@@ -75,7 +75,7 @@ function makeNetwork() {
 
 			if (dataDept == collectionDept) {
 				// copy object into collection object
-				collectionByDept.children[j].children.push(allObjectsDataset[i]);
+				collectionByDept.children[j].children.push(sortedByAcquired[i]);
 
 				// stop looking through collectionByDept
 				break;
@@ -88,27 +88,31 @@ function makeNetwork() {
 	
 
 
+	var diameter = 760,
+	    radius = diameter / 2,
+	    innerRadius = radius - 120;
+
 	var svg = d3.select("#graph")
 		.append("svg")
-			.attr("width", width)
-			.attr("height", height);
+			.attr("width", diameter)
+			.attr("height", diameter)
+			.append("g")
+    		.attr("transform", "translate(" + radius + "," + radius + ")");
 
 
 
-	var tree = d3.layout.cluster()
-		.size([600, 800]);
+
+	var cluster = d3.layout.cluster()
+		.size([360, innerRadius]);
 
 
-	var diagonal = d3.svg.diagonal()
-	.projection(function(d) { return [d.y, d.x]; });
+	var diagonal = d3.svg.diagonal.radial()
+	.projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
 
 
-	var nodes = tree.nodes(collectionByDept);
-	var links = tree.links(nodes);
+	var nodes = cluster.nodes(collectionByDept);
+	var links = cluster.links(nodes);
 
-
-    console.log(nodes)
-    console.log(links)
 
 
 	var link = svg.selectAll("pathlink")
@@ -122,10 +126,18 @@ function makeNetwork() {
 		.data(nodes)
 		.enter()
 		.append("g")
-		.attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
+		.attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
 
 	node.append("circle")
 		.attr("r", 2)
 		.attr("fill", "#ccc");
+
+	node.append("svg:text")
+            .attr("dx", function(d) { return d.x < 180 ? 8 : -8; })
+            .attr("dy", ".31em")
+            .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
+            .attr("transform", function(d) { return d.x < 180 ? null : "rotate(180)"; })
+            .text(function(d) { return d.yearAcquired; });
+        
 
 } // end of makeNetwork function
