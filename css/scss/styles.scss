@@ -82,7 +82,7 @@ li {
 	bottom: 0px;
 	left: 190px;
 
-	background-color: rgba(250,250,250,0.85);
+	background-color: rgba(255,255,255,0.85);
 }
 
 
@@ -286,22 +286,27 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
 
 /* ----------- NAVIGATION ----------- */
 
-#projectTItle:hover {
+#projectTitle:hover {
 	cursor: pointer;
+	color: $color-orange;
+}
+
+#projectTitle {
+	color: $color-orange
 }
 
 #nav-bar {
 	@include nav-style;
 
-	background-color: lighten($color-orange,5%);
+	//background-color: lighten($color-orange,5%);
 	font-family: "Akkurat";
 
 	a, a:visited {
-		@include link-style($color-main, none);
+		@include link-style($color-orange, none);
 	}
 
 	a:hover {
-		@include link-style($color-main, underline);
+		@include link-style($color-orange, underline);
 	}
 
 	z-index: 1;
@@ -334,7 +339,7 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
 	margin: 0;
 
 	li {
-		color: white;
+		color: $color-orange;
 		font: {
 			family: "Akkurat-Light";
 			size: .7em;
@@ -440,14 +445,14 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
 
 	button {
 		border: none;
-		background-color: lighten($color-orange,5%);
+		//background-color: lighten($color-orange,5%);
 		padding: 0;
 		margin: 0;
 		cursor: pointer;
 	}
 
 	.notpressed {
-		color: white;
+		color: $color-orange;
 		font: {
 			family: "Akkurat-Light";
 			size: 1em;

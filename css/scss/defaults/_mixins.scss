@@ -5,7 +5,7 @@
 
 @mixin key-text {
 	h1 {
-		color: white;
+		color: $color-orange;
 		font: {
 			family: "Akkurat-Bold";
 			size: .8em;
@@ -15,7 +15,7 @@
 	}
 
 	h2 {
-		color: white;
+		color: $color-orange;
 		font: {
 			family: "Akkurat-Bold";
 			size: .7em;
@@ -28,7 +28,7 @@
 	}
 
 	p {
-		color: white;
+		color: $color-orange;
 		font: {
 			family: "Akkurat-Light";
 			size: .7em;
