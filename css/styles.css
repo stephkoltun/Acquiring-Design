@@ -575,26 +575,27 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
 /* line 446, scss/styles.scss */
 .resort button {
   border: none;
+  background-color: white;
   padding: 0;
   margin: 0;
   cursor: pointer;
 }
 /* line 454, scss/styles.scss */
 .resort .notpressed {
-  color: #ff661b;
+  color: #ababab;
   font-family: "Akkurat-Light";
   font-size: 1em;
 }
 /* line 462, scss/styles.scss */
 .resort button:hover, .resort button:active, .resort button:focus {
-  color: #333333;
+  color: #ff661b;
   font-family: "Akkurat";
   font-size: 1em;
   cursor: pointer;
 }
 /* line 471, scss/styles.scss */
 .resort .pressed {
-  color: #333333;
+  color: #ff661b;
   font-family: "Akkurat";
   font-size: 1em;
   cursor: pointer;
