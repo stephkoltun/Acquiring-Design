@@ -122,9 +122,9 @@ li {
 
 .axis text {
 	fill: black;
-    font-family: Akkurat,sans-serif;
+    font-family: $sans-serif;
     font-size: 10px;
-    font-weight: 400;
+    font-weight: $normal;
 }
 
 .axis line {
@@ -142,9 +142,9 @@ li {
 
 .axisHide {
 	fill: black;
-	font-family: Akkurat,sans-serif;
+	font-family: $sans-serif;
     font-size: 10px;
-    font-weight: 400;
+    font-weight: $normal;
 }
 
 .subaxis line {
@@ -179,8 +179,8 @@ li {
 	h1 {
 		color: white;
 		font: {
-			family: "Akkurat-Bold";
-			weight: 400;
+			family: $sans-serif;
+			weight: $bold;
 			size: 4em;
 		}
 		line-height: 1.2;
@@ -191,8 +191,8 @@ li {
 	h2 {
 		color: white;
 		font: {
-			family: "Akkurat";
-			weight: 400;
+			family: $sans-serif;
+			weight: $normal;
 			size: 1.5em;
 		}
 		line-height: 1.2;
@@ -203,8 +203,8 @@ li {
 	p {
 		color: $color-main;
 		font: {
-			family: "Akkurat";
-			weight: 400;
+			family: $sans-serif;
+			weight: $normal;
 			size: 1.4em;
 		}
 		line-height: 1.5;
@@ -213,8 +213,8 @@ li {
 	p#credit {
 		color: white;
 		font: {
-			family: "Akkurat";
-			weight: 400;
+			family: $sans-serif;
+			weight: $normal;
 			size: .8em;
 		}
 		position: absolute;
@@ -263,7 +263,8 @@ button#loaded {
 		@include transition-duration(0.8s);
 
 		font: {
-			family: "Akkurat-Bold";
+			family: $sans-serif;
+			weight: $bold;
 			size: 2em;
 		}
 }
@@ -299,7 +300,8 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
 	@include nav-style;
 
 	//background-color: lighten($color-orange,5%);
-	font-family: "Akkurat";
+	font-family: $sans-serif;
+	font-weight: $normal;
 
 	a, a:visited {
 		@include link-style($color-orange, none);
@@ -323,7 +325,8 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
 	li {
 		color: white;
 		font: {
-			family: "Akkurat-Light";
+			family: $sans-serif;
+			weight: $light;
 			size: .7em;
 		}
 	}
@@ -341,7 +344,8 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
 	li {
 		color: $color-orange;
 		font: {
-			family: "Akkurat-Light";
+			family: $sans-serif;
+			weight: $light;
 			size: .7em;
 		}
 		padding: 2px 0;
@@ -430,7 +434,8 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
 
 .tooltip {
 	text-anchor: middle;
-    font-family: sans-serif;
+    font-family: $sans-serif;
+    font-weight: $normal;
     font-size: 8px;
     fill: black;
 }
@@ -454,7 +459,8 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
 	.notpressed {
 		color: $color-light;
 		font: {
-			family: "Akkurat-Light";
+			family: $sans-serif;
+			weight: $light;
 			size: 1em;
 		}
 	}
@@ -462,7 +468,8 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
 	button:hover, button:active, button:focus {
 		color: $color-orange;
   		font: {
-			family: "Akkurat";
+			family: $sans-serif;
+			weight: $light;
 			size: 1em;
 		}
   		cursor: pointer;
@@ -471,7 +478,8 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
 	 .pressed {
 	 	color: $color-orange;
   		font: {
-			family: "Akkurat";
+			family: $sans-serif;
+			weight: $normal;
 			size: 1em;
 		}
   		cursor: pointer;
@@ -524,7 +532,8 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
 
   		color: $color-main;
 		font: {
-			family: "Akkurat";
+			family: $sans-serif;
+			weight: $normal;
 			size: .8em;
 		}
 
@@ -537,7 +546,8 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
 
   		color: $color-main;
 		font: {
-			family: "Akkurat-Light";
+			family: $sans-serif;
+			weight: $light;
 			size: .8em;
 		}
   	}
@@ -548,7 +558,8 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
 
   		color: $color-main;
   		font: {
-			family: "Akkurat-Light";
+			family: $sans-serif;
+			weight: $light;
 			size: .8em;
 		}
 		line-height: 1.6;
@@ -556,7 +567,9 @@ button#loaded:hover, button#loaded:active, button#loaded:focus {
 
   	p.description {
   		font: {
-			family: "Akkurat-LightItalic";
+			family: $sans-serif;
+			weight: $light;
+			style: italic;
 		}
 		color: $color-light;
   	}
