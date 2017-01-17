@@ -1,6 +1,6 @@
 
-//Cooper Hewitt API token 
-var token = "2907bb23a319de02d7174829a85eef94";
+
+
 
 var allObjectsDataset = [];
 
